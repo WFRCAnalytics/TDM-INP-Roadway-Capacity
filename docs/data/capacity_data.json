@@ -21,10 +21,10 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 1,
       "CAP1HR1LN": 1065,
-      "MAX_HOURLY_VOL": NaN,
-      "PCT_OF_CAP": NaN,
-      "DATE": NaN,
-      "HOUR": NaN
+      "MAX_HOURLY_VOL": null,
+      "PCT_OF_CAP": null,
+      "DATE": null,
+      "HOUR": null
     },
     {
       "SITE": "-325",
@@ -125,10 +125,10 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 2,
       "CAP1HR1LN": 883,
-      "MAX_HOURLY_VOL": NaN,
-      "PCT_OF_CAP": NaN,
-      "DATE": NaN,
-      "HOUR": NaN
+      "MAX_HOURLY_VOL": null,
+      "PCT_OF_CAP": null,
+      "DATE": null,
+      "HOUR": null
     },
     {
       "SITE": "-631",
@@ -151,10 +151,10 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 2,
       "CAP1HR1LN": 975,
-      "MAX_HOURLY_VOL": NaN,
-      "PCT_OF_CAP": NaN,
-      "DATE": NaN,
-      "HOUR": NaN
+      "MAX_HOURLY_VOL": null,
+      "PCT_OF_CAP": null,
+      "DATE": null,
+      "HOUR": null
     },
     {
       "SITE": "-642",
@@ -177,10 +177,10 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 2,
       "CAP1HR1LN": 975,
-      "MAX_HOURLY_VOL": NaN,
-      "PCT_OF_CAP": NaN,
-      "DATE": NaN,
-      "HOUR": NaN
+      "MAX_HOURLY_VOL": null,
+      "PCT_OF_CAP": null,
+      "DATE": null,
+      "HOUR": null
     },
     {
       "SITE": "-645",
@@ -190,10 +190,10 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 2,
       "CAP1HR1LN": 883,
-      "MAX_HOURLY_VOL": NaN,
-      "PCT_OF_CAP": NaN,
-      "DATE": NaN,
-      "HOUR": NaN
+      "MAX_HOURLY_VOL": null,
+      "PCT_OF_CAP": null,
+      "DATE": null,
+      "HOUR": null
     },
     {
       "SITE": "-646",
@@ -320,10 +320,10 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 2,
       "CAP1HR1LN": 975,
-      "MAX_HOURLY_VOL": NaN,
-      "PCT_OF_CAP": NaN,
-      "DATE": NaN,
-      "HOUR": NaN
+      "MAX_HOURLY_VOL": null,
+      "PCT_OF_CAP": null,
+      "DATE": null,
+      "HOUR": null
     },
     {
       "SITE": "-664",
@@ -372,10 +372,10 @@
       "LINK_FTCLASS": "Minor Arterial",
       "LANES": 1,
       "CAP1HR1LN": 894,
-      "MAX_HOURLY_VOL": NaN,
-      "PCT_OF_CAP": NaN,
-      "DATE": NaN,
-      "HOUR": NaN
+      "MAX_HOURLY_VOL": null,
+      "PCT_OF_CAP": null,
+      "DATE": null,
+      "HOUR": null
     },
     {
       "SITE": "-322",
@@ -411,10 +411,10 @@
       "LINK_FTCLASS": "Minor Arterial",
       "LANES": 2,
       "CAP1HR1LN": 815,
-      "MAX_HOURLY_VOL": NaN,
-      "PCT_OF_CAP": NaN,
-      "DATE": NaN,
-      "HOUR": NaN
+      "MAX_HOURLY_VOL": null,
+      "PCT_OF_CAP": null,
+      "DATE": null,
+      "HOUR": null
     },
     {
       "SITE": "-657",
@@ -463,10 +463,10 @@
       "LINK_FTCLASS": "Collector",
       "LANES": 1,
       "CAP1HR1LN": 770,
-      "MAX_HOURLY_VOL": NaN,
-      "PCT_OF_CAP": NaN,
-      "DATE": NaN,
-      "HOUR": NaN
+      "MAX_HOURLY_VOL": null,
+      "PCT_OF_CAP": null,
+      "DATE": null,
+      "HOUR": null
     },
     {
       "SITE": "-643",
@@ -515,10 +515,10 @@
       "LINK_FTCLASS": "Expressway",
       "LANES": 1,
       "CAP1HR1LN": 1064,
-      "MAX_HOURLY_VOL": NaN,
-      "PCT_OF_CAP": NaN,
-      "DATE": NaN,
-      "HOUR": NaN
+      "MAX_HOURLY_VOL": null,
+      "PCT_OF_CAP": null,
+      "DATE": null,
+      "HOUR": null
     },
     {
       "SITE": "-416",
@@ -528,10 +528,10 @@
       "LINK_FTCLASS": "Expressway",
       "LANES": 1,
       "CAP1HR1LN": 1064,
-      "MAX_HOURLY_VOL": NaN,
-      "PCT_OF_CAP": NaN,
-      "DATE": NaN,
-      "HOUR": NaN
+      "MAX_HOURLY_VOL": null,
+      "PCT_OF_CAP": null,
+      "DATE": null,
+      "HOUR": null
     },
     {
       "SITE": "-634",
@@ -632,10 +632,10 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 2,
       "CAP1HR1LN": 1730,
-      "MAX_HOURLY_VOL": NaN,
-      "PCT_OF_CAP": NaN,
-      "DATE": NaN,
-      "HOUR": NaN
+      "MAX_HOURLY_VOL": null,
+      "PCT_OF_CAP": null,
+      "DATE": null,
+      "HOUR": null
     },
     {
       "SITE": "-315",
@@ -658,10 +658,10 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 3,
       "CAP1HR1LN": 1730,
-      "MAX_HOURLY_VOL": NaN,
-      "PCT_OF_CAP": NaN,
-      "DATE": NaN,
-      "HOUR": NaN
+      "MAX_HOURLY_VOL": null,
+      "PCT_OF_CAP": null,
+      "DATE": null,
+      "HOUR": null
     },
     {
       "SITE": "-341",
@@ -957,10 +957,10 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 3,
       "CAP1HR1LN": 1964,
-      "MAX_HOURLY_VOL": NaN,
-      "PCT_OF_CAP": NaN,
-      "DATE": NaN,
-      "HOUR": NaN
+      "MAX_HOURLY_VOL": null,
+      "PCT_OF_CAP": null,
+      "DATE": null,
+      "HOUR": null
     },
     {
       "SITE": "-349",

@@ -30,6 +30,7 @@ Usage (from repo root):
 """
 
 import json
+import math
 from pathlib import Path
 
 import geopandas as gpd
@@ -261,18 +262,30 @@ def write_dashboard_data(final: pd.DataFrame, summary: pd.DataFrame, ft2_by_lane
             "LANES", "CAP1HR1LN", "MAX_HOURLY_VOL", "PCT_OF_CAP", "DATE", "HOUR",
         ]
     ].copy()
-    stations = stations.where(pd.notna(stations), None)
-
-    summary_records = summary.where(pd.notna(summary), None)
-    ft2_records = ft2_by_lane.where(pd.notna(ft2_by_lane), None)
 
     payload = {
         "stations": stations.to_dict(orient="records"),
-        "ft_summary": summary_records.to_dict(orient="records"),
-        "ft2_by_lane": ft2_records.to_dict(orient="records"),
+        "ft_summary": summary.to_dict(orient="records"),
+        "ft2_by_lane": ft2_by_lane.to_dict(orient="records"),
     }
     with open(DASHBOARD_DATA_DIR / "capacity_data.json", "w") as f:
-        json.dump(payload, f, indent=2)
+        json.dump(_nan_to_none(payload), f, indent=2)
+
+
+def _nan_to_none(obj):
+    """Recursively replaces float NaN with None so json.dump emits valid
+    `null` instead of the bare `NaN` token Python's json module writes by
+    default -- NaN is not valid JSON and JSON.parse() rejects it in every
+    browser. DataFrame.where(notna, None) doesn't reliably fix this itself:
+    pandas casts None back to NaN for numeric-dtype columns, so sanitizing
+    the plain dict/list payload after to_dict() is the only safe point."""
+    if isinstance(obj, float) and math.isnan(obj):
+        return None
+    if isinstance(obj, dict):
+        return {k: _nan_to_none(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [_nan_to_none(v) for v in obj]
+    return obj
 
 
 def main():
