@@ -1,0 +1,11 @@
+# Common data/analysis junk
+*.pyc
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+*.log
+
+# Environments
+.venv/
+venv/
+env/
