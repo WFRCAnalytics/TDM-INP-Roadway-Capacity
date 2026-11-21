@@ -1,14 +1,17 @@
 """Compares observed CCS hourly volumes against the TDM's own spdcap capacity
 assumptions, by facility type (FT).
 
-For each CCS station, finds the max volume recorded in a single lane, single
-direction, within the Sept 1 - Nov 15 (Tue-Thu) calibration window, from the
-raw hourly-by-lane workbooks in data/. Matches each station to its nearest
-link on the filtered TDM network (centroid connectors, ramps, and HOV links
-excluded) to get that link's FT, lane count, and CAP1HR1LN (the model's
-per-lane-per-hour capacity assumption, itself sourced from
-data/Lookup_Speed_Capacity.csv by FT + lane count). Flags stations inside a
-mountainous TAZ (MARGINAL=1).
+For each CCS station and each year in YEAR_WORKBOOKS, finds the max volume
+recorded in a single lane, single direction, within that year's Sept 1 - Nov
+15 (Tue-Thu) calibration window, from the raw hourly-by-lane workbooks in
+data/. Also synthesizes an "all" pseudo-year per station: whichever year had
+that station's single highest max (station-matching and link geometry don't
+change by year, so this is a cheap re-use of the per-year results rather than
+a separate pass). Matches each station to its nearest link on the filtered
+TDM network (centroid connectors, ramps, and HOV links excluded) to get that
+link's FT, lane count, and CAP1HR1LN (the model's per-lane-per-hour capacity
+assumption, itself sourced from data/Lookup_Speed_Capacity.csv by FT + lane
+count). Flags stations inside a mountainous TAZ (MARGINAL=1).
 
 Three station sets are excluded from the final tables (not from the raw
 per-station output, which keeps everything for inspection):
@@ -50,20 +53,29 @@ REGION_GPKG = DATA_DIR / "RegionalBoundary.gpkg"
 CCS_LOCATIONS = DATA_DIR / "SiteData.csv"
 CCS_LOCATIONS_SUPPLEMENT = DATA_DIR / "SiteData_supplement.csv"
 SPDCAP_LOOKUP = DATA_DIR / "Lookup_Speed_Capacity.csv"
-CCS_LANE_WORKBOOKS = [
-    DATA_DIR / "2023 Station 301-431.xlsx",
-    DATA_DIR / "2023 Station 501-733.xlsx",
-]
+
+# One or more hourly-by-lane workbooks per year -- same sheet-per-station
+# layout (STATION, DATE, ROUTE, MP, LANE, H0000..H2300) in every year so far;
+# add a year here once its workbook(s) land in data/.
+YEAR_WORKBOOKS = {
+    2023: [DATA_DIR / "2023 Station 301-431.xlsx", DATA_DIR / "2023 Station 501-733.xlsx"],
+    2024: [DATA_DIR / "2024 Station 301-513.xlsx", DATA_DIR / "2024 Station 601-851.xlsx"],
+    2025: [DATA_DIR / "2025 Station 301-609.xlsx", DATA_DIR / "2025 Station 611-892.xlsx"],
+}
 
 CRS_UTM = 26912  # NAD83 / UTM zone 12N
 HOUR_COLS = [f"H{str(h).zfill(2)}00" for h in range(24)]
 
-# Same Sept 1 - Nov 15, Tue-Thu window WF-TDM-Calibration's report/4-assignhwy.qmd
-# uses for its own CCS "Target" volumes -- keeps this analysis's
-# calibration-window max directly comparable to what that report calls Target.
-CALIB_WINDOW_START = "2023-09-01"
-CALIB_WINDOW_END = "2023-11-15"
+# Same Sept 1 - Nov 15, Tue-Thu window (per year) WF-TDM-Calibration's report/
+# 4-assignhwy.qmd uses for its own CCS "Target" volumes -- keeps the 2023
+# calibration-window max directly comparable to what that report calls
+# Target. Applying the same relative window to every other year keeps
+# year-over-year comparisons on the same seasonal footing.
 CALIB_WEEKDAYS = [1, 2, 3]  # Tue, Wed, Thu
+
+
+def calib_window(year: int) -> tuple[str, str]:
+    return f"{year}-09-01", f"{year}-11-15"
 
 # Stations manually dropped -- see module docstring for why.
 OUTLIER_STATIONS = ["-635", "-665", "-319", "-306", "-626"]
@@ -144,11 +156,12 @@ def flag_mountainous_stations(gdf_ccs: gpd.GeoDataFrame) -> pd.DataFrame:
     return joined[["SITE", "IS_MARGINAL"]].drop_duplicates(subset="SITE")
 
 
-def max_hourly_volume_by_station(sites: list[str]) -> pd.DataFrame:
-    """Max volume in one lane, one direction, within the calibration window,
-    per station -- from the raw hourly-by-lane workbooks."""
+def max_hourly_volume_by_station(sites: list[str], year: int) -> pd.DataFrame:
+    """Max volume in one lane, one direction, within that year's calibration
+    window, per station -- from that year's raw hourly-by-lane workbooks."""
+    window_start, window_end = calib_window(year)
     results = []
-    for workbook in CCS_LANE_WORKBOOKS:
+    for workbook in YEAR_WORKBOOKS[year]:
         all_sheets = gpd_safe_read_excel_sheet_names(workbook)
         sheet_to_site = {s.lstrip("-").zfill(4): s for s in sites if s.lstrip("-").zfill(4) in all_sheets}
         if not sheet_to_site:
@@ -157,7 +170,7 @@ def max_hourly_volume_by_station(sites: list[str]) -> pd.DataFrame:
         for sheet, site in sheet_to_site.items():
             df = loaded[sheet].copy()
             df["DATE"] = pd.to_datetime(df["DATE"])
-            mask_date = (df["DATE"] >= CALIB_WINDOW_START) & (df["DATE"] <= CALIB_WINDOW_END)
+            mask_date = (df["DATE"] >= window_start) & (df["DATE"] <= window_end)
             mask_weekday = df["DATE"].dt.weekday.isin(CALIB_WEEKDAYS)
             df_window = df[mask_date & mask_weekday]
             if df_window.empty:
@@ -195,22 +208,53 @@ def spdcap_lookup_table() -> pd.DataFrame:
 
 
 def build_final_table() -> pd.DataFrame:
+    """One row per (station, year) for every year in YEAR_WORKBOOKS, plus a
+    synthesized YEAR="all" row per station carrying whichever year had that
+    station's single highest max (station-matching and link geometry are
+    year-independent, so this re-uses the per-year merges above rather than
+    a separate pass)."""
     gdf_ccs = load_ccs_site_locations()
     gdf_links = load_filtered_links()
 
     link_match = match_stations_to_links(gdf_ccs, gdf_links)
     marginal_flag = flag_mountainous_stations(gdf_ccs)
-    volumes = max_hourly_volume_by_station(gdf_ccs["SITE"].tolist())
+    sites = gdf_ccs["SITE"].tolist()
 
-    df = link_match.merge(marginal_flag, on="SITE", how="left").merge(volumes, on="SITE", how="left")
-    df["PCT_OF_CAP"] = (df["MAX_HOURLY_VOL"] / df["CAP1HR1LN"] * 100).round(0)
-    return df
+    year_frames = []
+    for year in YEAR_WORKBOOKS:
+        volumes = max_hourly_volume_by_station(sites, year)
+        df = link_match.merge(marginal_flag, on="SITE", how="left").merge(volumes, on="SITE", how="left")
+        df["YEAR"] = year
+        df["PCT_OF_CAP"] = (df["MAX_HOURLY_VOL"] / df["CAP1HR1LN"] * 100).round(0)
+        year_frames.append(df)
+
+    all_years = pd.concat(year_frames, ignore_index=True)
+    return pd.concat([all_years, all_time_max_slice(all_years)], ignore_index=True)
+
+
+def all_time_max_slice(all_years: pd.DataFrame) -> pd.DataFrame:
+    """One row per station: the (station, year) row with that station's
+    highest MAX_HOURLY_VOL across every year, tagged YEAR="all". Stations
+    with no volume in any year keep one row (any year) so they still appear
+    on the "all years" map/list, just with a null MAX_HOURLY_VOL."""
+    with_vol = all_years.dropna(subset=["MAX_HOURLY_VOL"])
+    best = all_years.loc[with_vol.groupby("SITE")["MAX_HOURLY_VOL"].idxmax()].copy()
+
+    sites_without_vol = set(all_years["SITE"]) - set(best["SITE"])
+    if sites_without_vol:
+        filler = all_years[all_years["SITE"].isin(sites_without_vol)].drop_duplicates(subset="SITE", keep="first")
+        best = pd.concat([best, filler], ignore_index=True)
+
+    best["YEAR"] = "all"
+    return best
 
 
 def apply_exclusions(df: pd.DataFrame) -> pd.DataFrame:
     excluded = OUTLIER_STATIONS + BANGERTER_EXPRESSWAY_STATIONS
     out = df[~df["SITE"].isin(excluded) & ~df["IS_MARGINAL"].fillna(False)].copy()
-    return out.sort_values(["LINK_FT", "SITE"]).reset_index(drop=True)
+    out["_year_sort"] = out["YEAR"].apply(lambda y: 9999 if y == "all" else y)
+    out = out.sort_values(["LINK_FT", "SITE", "_year_sort"]).drop(columns=["_year_sort"])
+    return out.reset_index(drop=True)
 
 
 def ft_summary(df: pd.DataFrame) -> pd.DataFrame:
@@ -261,8 +305,8 @@ def write_dashboard_data(final: pd.DataFrame, summary: pd.DataFrame) -> None:
     stations = final[
         [
             "SITE", "SITE_DESCRIPTION", "LATITUDE", "LONGITUDE", "LINK_STREET",
-            "LINK_FT", "LINK_FTCLASS", "LANES", "CAP1HR1LN", "MAX_HOURLY_VOL",
-            "PCT_OF_CAP", "DATE", "HOUR",
+            "LINK_FT", "LINK_FTCLASS", "LANES", "CAP1HR1LN", "YEAR",
+            "MAX_HOURLY_VOL", "PCT_OF_CAP", "DATE", "HOUR",
         ]
     ].copy()
 
@@ -299,19 +343,25 @@ def main():
     final = apply_exclusions(raw)
     final.to_csv(OUT_DIR / "ccs_station_link_capacity_final.csv", index=False)
 
-    summary = ft_summary(final)
+    summary_frames = []
+    for year in [*YEAR_WORKBOOKS, "all"]:
+        s = ft_summary(final[final["YEAR"] == year])
+        s["YEAR"] = year
+        summary_frames.append(s)
+    summary = pd.concat(summary_frames, ignore_index=True)
     summary.to_csv(OUT_DIR / "ft_summary.csv", index=False)
 
-    arterial_by_lane = lane_breakdown_for_ft(final, ft=2)
+    baseline_year = min(YEAR_WORKBOOKS)
+    arterial_by_lane = lane_breakdown_for_ft(final[final["YEAR"] == baseline_year], ft=2)
     arterial_by_lane.to_csv(OUT_DIR / "ft2_principal_arterial_by_lane.csv", index=False)
 
     write_dashboard_data(final, summary)
 
-    print(f"{len(raw)} CCS stations matched, {len(final)} remaining after exclusions")
+    print(f"{len(raw)} CCS station-years matched, {len(final)} remaining after exclusions")
     print()
     print(summary.to_string(index=False))
     print()
-    print("FT 2 (Principal Arterial) by lane count:")
+    print(f"FT 2 (Principal Arterial) by lane count, {baseline_year}:")
     print(arterial_by_lane.to_string(index=False))
 
 

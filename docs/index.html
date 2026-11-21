@@ -89,9 +89,10 @@
   .table-scroll { overflow-x: auto; }
 
   .filters {
-    display: flex; flex-wrap: wrap; gap: 10px;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
     margin-bottom: 14px;
   }
+  .filters label { font-size: 0.88rem; color: var(--text-secondary); }
   .filters input, .filters select {
     font: inherit;
     font-size: 0.88rem;
@@ -131,21 +132,32 @@
     mapped and filterable per station.
   </p>
   <p class="provenance">
-    Observed volumes: UDOT CCS hourly-by-lane counts, Sept&ndash;Nov 2023 calibration
-    window (Tue&ndash;Thu). Model capacity assumptions and network links: a frozen
-    snapshot of calibration run <strong>C74</strong> from
+    Observed volumes: UDOT CCS hourly-by-lane counts, each year's Sept&ndash;Nov
+    calibration window (Tue&ndash;Thu). Model capacity assumptions and network
+    links: a frozen snapshot of calibration run <strong>C74</strong> from
     <a href="https://github.com/WFRCAnalytics/WF-TDM-Calibration" target="_blank" rel="noopener">WF-TDM-Calibration</a>
     (<code>tdm_ref: calib/C74</code>) &mdash; see this repo's README for full data
     provenance and how to regenerate.
   </p>
 </header>
 
+<div class="filters">
+  <label for="f-year">Year</label>
+  <select id="f-year">
+    <option value="2023">2023</option>
+    <option value="2024">2024</option>
+    <option value="2025">2025</option>
+    <option value="all" selected>All years</option>
+  </select>
+</div>
+
 <section class="panel">
   <h2>Stations by facility type</h2>
   <p class="panel-note">
-    Each CCS station's single-lane, single-direction peak hour, Sept&ndash;Nov 2023
-    calibration window (Tue&ndash;Thu). Filter to one facility type to see just
-    those stations on the map and in the list below.
+    Each CCS station's single-lane, single-direction peak hour within the
+    selected year's Sept&ndash;Nov calibration window (Tue&ndash;Thu), or its
+    all-time peak across every year loaded. Filter to one facility type to
+    see just those stations on the map and in the list below.
   </p>
   <div class="filters">
     <select id="f-map-ftclass"><option value="">All facility types</option></select>
@@ -171,8 +183,8 @@
   <h2>Station detail</h2>
   <p class="panel-note">
     One row per CCS station that cleared exclusions (outliers, Bangerter Hwy
-    expressway-coded segments, and stations inside a mountainous TAZ). 80 of 92
-    matched stations shown.
+    expressway-coded segments, and stations inside a mountainous TAZ) for the
+    year selected above. 80 of 92 matched stations shown.
   </p>
   <div class="filters">
     <input type="search" id="f-search" placeholder="Search site, street, description&hellip;">
@@ -253,14 +265,22 @@ function makeSortable(table, rows, renderBody) {
 fetch("data/capacity_data.json")
   .then(r => r.json())
   .then(data => {
-    renderFacilityOverview(data.stations, data.ft_summary);
-    renderStations(data.stations);
+    const yearSel = document.getElementById("f-year");
+    const getYear = () => yearSel.value === "all" ? "all" : Number(yearSel.value);
+
+    const facilityPanel = renderFacilityOverview(data.stations, data.ft_summary, getYear);
+    const stationPanel = renderStations(data.stations, getYear);
+
+    yearSel.addEventListener("change", () => {
+      facilityPanel.refreshYear();
+      stationPanel.refreshYear();
+    });
   });
 
 // --- Facility-type map + list ---------------------------------------------
-function renderFacilityOverview(stations, ftSummary) {
-  const summaryRows = ftSummary.slice().sort((a, b) => a.LINK_FT - b.LINK_FT);
+function renderFacilityOverview(allStations, allFtSummary, getYear) {
   let currentFt = "";
+  const summaryRows = []; // mutated in place per year so makeSortable's reference stays valid
 
   const map = L.map("map", { scrollWheelZoom: false });
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -271,7 +291,10 @@ function renderFacilityOverview(stations, ftSummary) {
   const stationColor = cssVar("--series-1");
   const ringColor = cssVar("--surface-1");
 
-  const visibleStations = () => currentFt ? stations.filter(s => s.LINK_FTCLASS === currentFt) : stations;
+  const visibleStations = () => {
+    const ys = allStations.filter(s => s.YEAR === getYear());
+    return currentFt ? ys.filter(s => s.LINK_FTCLASS === currentFt) : ys;
+  };
   const visibleSummary = () => currentFt ? summaryRows.filter(r => r.LINK_FTCLASS === currentFt) : summaryRows;
 
   function drawMap() {
@@ -304,12 +327,19 @@ function renderFacilityOverview(stations, ftSummary) {
       </tr>`).join("");
   }
 
-  drawMap();
-  drawTable(visibleSummary());
+  function refreshYear() {
+    const rowsForYear = allFtSummary.filter(r => r.YEAR === getYear()).sort((a, b) => a.LINK_FT - b.LINK_FT);
+    summaryRows.length = 0;
+    summaryRows.push(...rowsForYear);
+    drawMap();
+    drawTable(visibleSummary());
+  }
+
+  refreshYear();
   makeSortable(document.getElementById("table-ft"), summaryRows, () => drawTable(visibleSummary()));
 
   const ftSel = document.getElementById("f-map-ftclass");
-  [...new Set(stations.map(s => s.LINK_FTCLASS))].sort().forEach(v => {
+  [...new Set(allStations.map(s => s.LINK_FTCLASS))].sort().forEach(v => {
     const o = document.createElement("option"); o.value = v; o.textContent = v; ftSel.appendChild(o);
   });
   ftSel.addEventListener("change", () => {
@@ -319,11 +349,13 @@ function renderFacilityOverview(stations, ftSummary) {
   });
 
   setTimeout(() => map.invalidateSize(), 0);
+
+  return { refreshYear };
 }
 
 // --- Station detail table ---------------------------------------------
-function renderStations(stations) {
-  const rows = stations.slice();
+function renderStations(allStations, getYear) {
+  const rows = []; // mutated in place per year so makeSortable's reference stays valid
   const tbody = document.querySelector("#table-stations tbody");
 
   function draw(rs) {
@@ -340,15 +372,14 @@ function renderStations(stations) {
         <td>${r.DATE ?? "–"}</td>
       </tr>`).join("");
   }
-  draw(rows);
   makeSortable(document.getElementById("table-stations"), rows, draw);
 
   const ftSel = document.getElementById("f-ftclass");
   const laneSel = document.getElementById("f-lanes");
-  [...new Set(rows.map(r => r.LINK_FTCLASS))].sort().forEach(v => {
+  [...new Set(allStations.map(r => r.LINK_FTCLASS))].sort().forEach(v => {
     const o = document.createElement("option"); o.value = v; o.textContent = v; ftSel.appendChild(o);
   });
-  [...new Set(rows.map(r => r.LANES))].sort((a, b) => a - b).forEach(v => {
+  [...new Set(allStations.map(r => r.LANES))].sort((a, b) => a - b).forEach(v => {
     const o = document.createElement("option"); o.value = v; o.textContent = v + " lane" + (v == 1 ? "" : "s"); laneSel.appendChild(o);
   });
 
@@ -370,6 +401,16 @@ function renderStations(stations) {
   document.getElementById("f-search").addEventListener("input", applyFilters);
   ftSel.addEventListener("change", applyFilters);
   laneSel.addEventListener("change", applyFilters);
+
+  function refreshYear() {
+    const rowsForYear = allStations.filter(s => s.YEAR === getYear());
+    rows.length = 0;
+    rows.push(...rowsForYear);
+    applyFilters();
+  }
+  refreshYear();
+
+  return { refreshYear };
 }
 </script>
 </body>
