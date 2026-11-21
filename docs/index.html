@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TDM Roadway Capacity</title>
-<meta name="description" content="UDOT CCS observed hourly volumes vs. the Wasatch Front TDM's own capacity assumptions, by facility type and lane count.">
-<script src="vendor/chart.umd.min.js"></script>
+<meta name="description" content="UDOT CCS observed hourly volumes across the Wasatch Front network, mapped and filterable by facility type.">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.min.css">
+<script src="vendor/leaflet/leaflet.min.js"></script>
 <style>
   :root {
     color-scheme: light;
@@ -18,7 +19,6 @@
     --baseline:       #c3c2b7;
     --border:         rgba(11,11,11,0.10);
     --series-1:       #2a78d6; /* blue */
-    --series-2:       #eb6834; /* orange */
     --status-good:    #0ca30c;
     --status-warning: #fab219;
     --status-critical:#d03b3b;
@@ -35,7 +35,6 @@
       --baseline:       #383835;
       --border:         rgba(255,255,255,0.10);
       --series-1:       #3987e5;
-      --series-2:       #d95926;
       --status-good:    #0ca30c;
       --status-warning: #fab219;
       --status-critical:#d03b3b;
@@ -70,7 +69,10 @@
   .panel h2 { font-size: 1.05rem; margin: 0 0 4px; }
   .panel .panel-note { color: var(--text-secondary); font-size: 0.9rem; margin: 0 0 16px; }
 
-  .chart-box { position: relative; height: 320px; margin-bottom: 18px; }
+  .map-box {
+    height: 420px; margin-bottom: 18px; border-radius: 8px;
+    border: 1px solid var(--border); overflow: hidden;
+  }
 
   table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
   th, td {
@@ -114,7 +116,7 @@
   footer { color: var(--text-muted); font-size: 0.82rem; margin: 30px 0 10px; }
 
   @media (max-width: 640px) {
-    .chart-box { height: 260px; }
+    .map-box { height: 300px; }
   }
 </style>
 </head>
@@ -124,9 +126,9 @@
 <header>
   <h1>TDM Roadway Capacity</h1>
   <p class="subtitle">
-    UDOT continuous count station (CCS) observed hourly volumes compared against the
-    Wasatch Front travel demand model's own per-lane capacity assumptions, by facility
-    type and lane count.
+    UDOT continuous count station (CCS) observed hourly volumes across the Wasatch
+    Front network &mdash; max and average-of-max single-lane volume by facility type,
+    mapped and filterable per station.
   </p>
   <p class="provenance">
     Observed volumes: UDOT CCS hourly-by-lane counts, Sept&ndash;Nov 2023 calibration
@@ -139,13 +141,16 @@
 </header>
 
 <section class="panel">
-  <h2>Capacity by facility type</h2>
+  <h2>Stations by facility type</h2>
   <p class="panel-note">
-    Average of each station's single-lane, single-direction peak hour (as a % of the
-    model's per-lane hourly capacity for that facility type), across stations matched
-    to each facility type.
+    Each CCS station's single-lane, single-direction peak hour, Sept&ndash;Nov 2023
+    calibration window (Tue&ndash;Thu). Filter to one facility type to see just
+    those stations on the map and in the list below.
   </p>
-  <div class="chart-box"><canvas id="chart-ft"></canvas></div>
+  <div class="filters">
+    <select id="f-map-ftclass"><option value="">All facility types</option></select>
+  </div>
+  <div id="map" class="map-box"></div>
   <div class="table-scroll">
     <table id="table-ft">
       <thead>
@@ -155,34 +160,6 @@
           <th class="num" data-key="n_with_volume">With volume</th>
           <th class="num" data-key="avg_of_max">Avg of max (veh/hr)</th>
           <th class="num" data-key="max_of_max">Max of max (veh/hr)</th>
-          <th class="num" data-key="pct_avg">Avg % of cap</th>
-          <th class="num" data-key="pct_max">Max % of cap</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
-</section>
-
-<section class="panel">
-  <h2>Principal arterial (FT 2) by lane count</h2>
-  <p class="panel-note">
-    Does the model's lane-count-dependent capacity actually track observed volume per
-    lane? Average and peak single-lane volume, as a % of the model's assumed per-lane
-    capacity at that lane count.
-  </p>
-  <div class="chart-box"><canvas id="chart-lanes"></canvas></div>
-  <div class="table-scroll">
-    <table id="table-lanes">
-      <thead>
-        <tr>
-          <th class="num" data-key="LANES">Lanes</th>
-          <th class="num" data-key="n_stations">Stations</th>
-          <th class="num" data-key="model_cap_per_lane">Model cap/lane (veh/hr)</th>
-          <th class="num" data-key="avg_of_max">Avg of max (veh/hr)</th>
-          <th class="num" data-key="max_of_max">Max of max (veh/hr)</th>
-          <th class="num" data-key="pct_of_cap_at_avg">Avg % of cap</th>
-          <th class="num" data-key="pct_of_cap_at_max">Max % of cap</th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -273,125 +250,75 @@ function makeSortable(table, rows, renderBody) {
   });
 }
 
-Chart.defaults.font.family = "system-ui, -apple-system, 'Segoe UI', sans-serif";
-Chart.defaults.color = cssVar("--text-secondary");
-Chart.defaults.borderColor = cssVar("--gridline");
-
 fetch("data/capacity_data.json")
   .then(r => r.json())
   .then(data => {
-    renderFtSummary(data.ft_summary);
-    renderLaneBreakdown(data.ft2_by_lane);
+    renderFacilityOverview(data.stations, data.ft_summary);
     renderStations(data.stations);
   });
 
-// --- FT summary chart + table ---------------------------------------------
-function renderFtSummary(ftSummary) {
-  const rows = ftSummary.map(r => ({
-    ...r,
-    pct_avg: r.avg_of_max != null && r.CAPLN1 ? (r.avg_of_max / r.CAPLN1) * 100 : null,
-    pct_max: r.max_of_max != null && r.CAPLN1 ? (r.max_of_max / r.CAPLN1) * 100 : null,
-  })).sort((a, b) => a.LINK_FT - b.LINK_FT);
+// --- Facility-type map + list ---------------------------------------------
+function renderFacilityOverview(stations, ftSummary) {
+  const summaryRows = ftSummary.slice().sort((a, b) => a.LINK_FT - b.LINK_FT);
+  let currentFt = "";
 
-  new Chart(document.getElementById("chart-ft"), {
-    type: "bar",
-    data: {
-      labels: rows.map(r => r.LINK_FTCLASS + " (FT " + r.LINK_FT + ")"),
-      datasets: [{
-        label: "Avg % of capacity",
-        data: rows.map(r => r.pct_avg),
-        backgroundColor: cssVar("--series-1"),
-        borderRadius: 4,
-        maxBarThickness: 24,
-      }],
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      scales: {
-        x: { grid: { display: false }, ticks: { autoSkip: false, maxRotation: 45, minRotation: 45 } },
-        y: { beginAtZero: true, grid: { color: cssVar("--gridline") }, title: { display: true, text: "% of per-lane capacity" } },
-      },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: ctx => {
-              const r = rows[ctx.dataIndex];
-              return [`Avg of max: ${fmt0(r.avg_of_max)} veh/hr (${fmtPct(r.pct_avg)} of cap)`,
-                      `Max of max: ${fmt0(r.max_of_max)} veh/hr (${fmtPct(r.pct_max)} of cap)`,
-                      `${r.n_with_volume} of ${r.n_stations} stations with volume`];
-            },
-          },
-        },
-      },
-    },
-  });
+  const map = L.map("map", { scrollWheelZoom: false });
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors',
+  }).addTo(map);
+  const markersLayer = L.layerGroup().addTo(map);
+  const stationColor = cssVar("--series-1");
+  const ringColor = cssVar("--surface-1");
 
-  const tbody = document.querySelector("#table-ft tbody");
-  function draw(rs) {
-    tbody.innerHTML = rs.map(r => `
+  const visibleStations = () => currentFt ? stations.filter(s => s.LINK_FTCLASS === currentFt) : stations;
+  const visibleSummary = () => currentFt ? summaryRows.filter(r => r.LINK_FTCLASS === currentFt) : summaryRows;
+
+  function drawMap() {
+    markersLayer.clearLayers();
+    const pts = [];
+    visibleStations().forEach(s => {
+      if (s.LATITUDE == null || s.LONGITUDE == null) return;
+      pts.push([s.LATITUDE, s.LONGITUDE]);
+      L.circleMarker([s.LATITUDE, s.LONGITUDE], {
+        radius: 6, color: ringColor, weight: 1.5, fillColor: stationColor, fillOpacity: 0.85,
+      }).bindPopup(
+        `<strong>${s.SITE}</strong> &mdash; ${s.SITE_DESCRIPTION ?? "–"}<br>` +
+        `${s.LINK_FTCLASS} (FT ${s.LINK_FT}), ${s.LANES} lane${s.LANES == 1 ? "" : "s"}<br>` +
+        `Max hourly vol: ${fmt0(s.MAX_HOURLY_VOL)} veh/hr${s.DATE ? ` on ${s.DATE}` : ""}`
+      ).addTo(markersLayer);
+    });
+    if (pts.length) map.fitBounds(pts, { padding: [24, 24], maxZoom: 13 });
+    else map.setView([40.7, -111.9], 9);
+  }
+
+  function drawTable(rows) {
+    const tbody = document.querySelector("#table-ft tbody");
+    tbody.innerHTML = rows.map(r => `
       <tr>
         <td>${r.LINK_FTCLASS} (FT ${r.LINK_FT})</td>
         <td class="num">${r.n_stations}</td>
         <td class="num">${r.n_with_volume}</td>
         <td class="num">${fmt0(r.avg_of_max)}</td>
         <td class="num">${fmt0(r.max_of_max)}</td>
-        <td class="num"><span class="pct-pill ${pctClass(r.pct_avg)}">${fmtPct(r.pct_avg)}</span></td>
-        <td class="num"><span class="pct-pill ${pctClass(r.pct_max)}">${fmtPct(r.pct_max)}</span></td>
       </tr>`).join("");
   }
-  draw(rows);
-  makeSortable(document.getElementById("table-ft"), rows, draw);
-}
 
-// --- FT2-by-lane chart + table ---------------------------------------------
-function renderLaneBreakdown(rows) {
-      new Chart(document.getElementById("chart-lanes"), {
-        type: "bar",
-        data: {
-          labels: rows.map(r => r.LANES + " lane" + (r.LANES == 1 ? "" : "s")),
-          datasets: [
-            { label: "Avg of max", data: rows.map(r => +r.pct_of_cap_at_avg), backgroundColor: cssVar("--series-1"), borderRadius: 4, maxBarThickness: 24 },
-            { label: "Max of max", data: rows.map(r => +r.pct_of_cap_at_max), backgroundColor: cssVar("--series-2"), borderRadius: 4, maxBarThickness: 24 },
-          ],
-        },
-        options: {
-          responsive: true, maintainAspectRatio: false,
-          scales: {
-            x: { grid: { display: false } },
-            y: { beginAtZero: true, grid: { color: cssVar("--gridline") }, title: { display: true, text: "% of per-lane capacity" } },
-          },
-          plugins: {
-            legend: { position: "top", align: "end", labels: { boxWidth: 12, usePointStyle: true } },
-            tooltip: {
-              callbacks: {
-                label: ctx => {
-                  const r = rows[ctx.dataIndex];
-                  const label = ctx.dataset.label;
-                  const veh = label === "Avg of max" ? r.avg_of_max : r.max_of_max;
-                  return `${label}: ${fmt0(+veh)} veh/hr (${fmtPct(ctx.parsed.y)} of cap)`;
-                },
-              },
-            },
-          },
-        },
-      });
+  drawMap();
+  drawTable(visibleSummary());
+  makeSortable(document.getElementById("table-ft"), summaryRows, () => drawTable(visibleSummary()));
 
-      const tbody = document.querySelector("#table-lanes tbody");
-      function draw(rs) {
-        tbody.innerHTML = rs.map(r => `
-          <tr>
-            <td class="num">${r.LANES}</td>
-            <td class="num">${r.n_stations}</td>
-            <td class="num">${fmt0(+r.model_cap_per_lane)}</td>
-            <td class="num">${fmt0(+r.avg_of_max)}</td>
-            <td class="num">${fmt0(+r.max_of_max)}</td>
-            <td class="num"><span class="pct-pill ${pctClass(+r.pct_of_cap_at_avg)}">${fmtPct(+r.pct_of_cap_at_avg)}</span></td>
-            <td class="num"><span class="pct-pill ${pctClass(+r.pct_of_cap_at_max)}">${fmtPct(+r.pct_of_cap_at_max)}</span></td>
-          </tr>`).join("");
-      }
-      draw(rows);
-      makeSortable(document.getElementById("table-lanes"), rows, draw);
+  const ftSel = document.getElementById("f-map-ftclass");
+  [...new Set(stations.map(s => s.LINK_FTCLASS))].sort().forEach(v => {
+    const o = document.createElement("option"); o.value = v; o.textContent = v; ftSel.appendChild(o);
+  });
+  ftSel.addEventListener("change", () => {
+    currentFt = ftSel.value;
+    drawMap();
+    drawTable(visibleSummary());
+  });
+
+  setTimeout(() => map.invalidateSize(), 0);
 }
 
 // --- Station detail table ---------------------------------------------

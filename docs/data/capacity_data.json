@@ -8,10 +8,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 1,
       "CAP1HR1LN": 1016,
-      "MAX_HOURLY_VOL": 423.0,
-      "PCT_OF_CAP": 42.0,
+      "MAX_HOURLY_VOL": 423,
+      "PCT_OF_CAP": 42,
       "DATE": "2023-11-15",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.571662,
+      "LONGITUDE": -111.771439
     },
     {
       "SITE": "-321",
@@ -24,7 +26,9 @@
       "MAX_HOURLY_VOL": null,
       "PCT_OF_CAP": null,
       "DATE": null,
-      "HOUR": null
+      "HOUR": null,
+      "LATITUDE": 39.951841,
+      "LONGITUDE": -111.957826
     },
     {
       "SITE": "-325",
@@ -34,10 +38,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 3,
       "CAP1HR1LN": 846,
-      "MAX_HOURLY_VOL": 611.0,
-      "PCT_OF_CAP": 72.0,
+      "MAX_HOURLY_VOL": 611,
+      "PCT_OF_CAP": 72,
       "DATE": "2023-11-02",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.745655,
+      "LONGITUDE": -111.888458
     },
     {
       "SITE": "-329",
@@ -47,10 +53,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 2,
       "CAP1HR1LN": 883,
-      "MAX_HOURLY_VOL": 1181.0,
-      "PCT_OF_CAP": 134.0,
+      "MAX_HOURLY_VOL": 1181,
+      "PCT_OF_CAP": 134,
       "DATE": "2023-09-28",
-      "HOUR": "H1400"
+      "HOUR": "H1400",
+      "LATITUDE": 41.201341,
+      "LONGITUDE": -111.971118
     },
     {
       "SITE": "-332",
@@ -60,10 +68,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 3,
       "CAP1HR1LN": 890,
-      "MAX_HOURLY_VOL": 1165.0,
-      "PCT_OF_CAP": 131.0,
+      "MAX_HOURLY_VOL": 1165,
+      "PCT_OF_CAP": 131,
       "DATE": "2023-10-25",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.746859,
+      "LONGITUDE": -111.830381
     },
     {
       "SITE": "-333",
@@ -73,10 +83,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 3,
       "CAP1HR1LN": 846,
-      "MAX_HOURLY_VOL": 835.0,
-      "PCT_OF_CAP": 99.0,
+      "MAX_HOURLY_VOL": 835,
+      "PCT_OF_CAP": 99,
       "DATE": "2023-09-28",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.746457,
+      "LONGITUDE": -111.871363
     },
     {
       "SITE": "-354",
@@ -86,10 +98,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 3,
       "CAP1HR1LN": 846,
-      "MAX_HOURLY_VOL": 797.0,
-      "PCT_OF_CAP": 94.0,
+      "MAX_HOURLY_VOL": 797,
+      "PCT_OF_CAP": 94,
       "DATE": "2023-11-01",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.699222,
+      "LONGITUDE": -111.922279
     },
     {
       "SITE": "-406",
@@ -99,10 +113,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 3,
       "CAP1HR1LN": 846,
-      "MAX_HOURLY_VOL": 1112.0,
-      "PCT_OF_CAP": 131.0,
+      "MAX_HOURLY_VOL": 1112,
+      "PCT_OF_CAP": 131,
       "DATE": "2023-09-20",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.671812,
+      "LONGITUDE": -111.871691
     },
     {
       "SITE": "-407",
@@ -112,10 +128,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 2,
       "CAP1HR1LN": 975,
-      "MAX_HOURLY_VOL": 1009.0,
-      "PCT_OF_CAP": 103.0,
+      "MAX_HOURLY_VOL": 1009,
+      "PCT_OF_CAP": 103,
       "DATE": "2023-10-03",
-      "HOUR": "H0800"
+      "HOUR": "H0800",
+      "LATITUDE": 40.46655,
+      "LONGITUDE": -111.944862
     },
     {
       "SITE": "-408",
@@ -128,7 +146,9 @@
       "MAX_HOURLY_VOL": null,
       "PCT_OF_CAP": null,
       "DATE": null,
-      "HOUR": null
+      "HOUR": null,
+      "LATITUDE": 40.742844,
+      "LONGITUDE": -111.938866
     },
     {
       "SITE": "-631",
@@ -138,10 +158,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 2,
       "CAP1HR1LN": 883,
-      "MAX_HOURLY_VOL": 1081.0,
-      "PCT_OF_CAP": 122.0,
+      "MAX_HOURLY_VOL": 1081,
+      "PCT_OF_CAP": 122,
       "DATE": "2023-09-07",
-      "HOUR": "H1600"
+      "HOUR": "H1600",
+      "LATITUDE": 40.672918,
+      "LONGITUDE": -111.918702
     },
     {
       "SITE": "-633",
@@ -154,7 +176,9 @@
       "MAX_HOURLY_VOL": null,
       "PCT_OF_CAP": null,
       "DATE": null,
-      "HOUR": null
+      "HOUR": null,
+      "LATITUDE": 40.464051,
+      "LONGITUDE": -111.950068
     },
     {
       "SITE": "-642",
@@ -164,10 +188,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 3,
       "CAP1HR1LN": 846,
-      "MAX_HOURLY_VOL": 848.0,
-      "PCT_OF_CAP": 100.0,
+      "MAX_HOURLY_VOL": 848,
+      "PCT_OF_CAP": 100,
       "DATE": "2023-10-03",
-      "HOUR": "H1600"
+      "HOUR": "H1600",
+      "LATITUDE": 40.311928,
+      "LONGITUDE": -111.711767
     },
     {
       "SITE": "-644",
@@ -180,7 +206,9 @@
       "MAX_HOURLY_VOL": null,
       "PCT_OF_CAP": null,
       "DATE": null,
-      "HOUR": null
+      "HOUR": null,
+      "LATITUDE": 40.362326,
+      "LONGITUDE": -111.931613
     },
     {
       "SITE": "-645",
@@ -193,7 +221,9 @@
       "MAX_HOURLY_VOL": null,
       "PCT_OF_CAP": null,
       "DATE": null,
-      "HOUR": null
+      "HOUR": null,
+      "LATITUDE": 40.365417,
+      "LONGITUDE": -111.768944
     },
     {
       "SITE": "-646",
@@ -203,10 +233,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 2,
       "CAP1HR1LN": 929,
-      "MAX_HOURLY_VOL": 1112.0,
-      "PCT_OF_CAP": 120.0,
+      "MAX_HOURLY_VOL": 1112,
+      "PCT_OF_CAP": 120,
       "DATE": "2023-09-27",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.161129,
+      "LONGITUDE": -111.634985
     },
     {
       "SITE": "-647",
@@ -216,10 +248,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 3,
       "CAP1HR1LN": 846,
-      "MAX_HOURLY_VOL": 886.0,
-      "PCT_OF_CAP": 105.0,
+      "MAX_HOURLY_VOL": 886,
+      "PCT_OF_CAP": 105,
       "DATE": "2023-09-21",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.353899,
+      "LONGITUDE": -111.733836
     },
     {
       "SITE": "-649",
@@ -229,10 +263,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 2,
       "CAP1HR1LN": 883,
-      "MAX_HOURLY_VOL": 1146.0,
-      "PCT_OF_CAP": 130.0,
+      "MAX_HOURLY_VOL": 1146,
+      "PCT_OF_CAP": 130,
       "DATE": "2023-10-24",
-      "HOUR": "H0800"
+      "HOUR": "H0800",
+      "LATITUDE": 40.233911,
+      "LONGITUDE": -111.671631
     },
     {
       "SITE": "-650",
@@ -242,10 +278,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 2,
       "CAP1HR1LN": 929,
-      "MAX_HOURLY_VOL": 1164.0,
-      "PCT_OF_CAP": 125.0,
+      "MAX_HOURLY_VOL": 1164,
+      "PCT_OF_CAP": 125,
       "DATE": "2023-10-31",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 39.975713,
+      "LONGITUDE": -111.782327
     },
     {
       "SITE": "-651",
@@ -255,10 +293,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 2,
       "CAP1HR1LN": 883,
-      "MAX_HOURLY_VOL": 935.0,
-      "PCT_OF_CAP": 106.0,
+      "MAX_HOURLY_VOL": 935,
+      "PCT_OF_CAP": 106,
       "DATE": "2023-11-09",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.277892,
+      "LONGITUDE": -111.729913
     },
     {
       "SITE": "-653",
@@ -268,10 +308,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 2,
       "CAP1HR1LN": 883,
-      "MAX_HOURLY_VOL": 966.0,
-      "PCT_OF_CAP": 109.0,
+      "MAX_HOURLY_VOL": 966,
+      "PCT_OF_CAP": 109,
       "DATE": "2023-09-19",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.121068,
+      "LONGITUDE": -111.654506
     },
     {
       "SITE": "-658",
@@ -281,10 +323,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 2,
       "CAP1HR1LN": 883,
-      "MAX_HOURLY_VOL": 715.0,
-      "PCT_OF_CAP": 81.0,
+      "MAX_HOURLY_VOL": 715,
+      "PCT_OF_CAP": 81,
       "DATE": "2023-10-10",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.385706,
+      "LONGITUDE": -111.819418
     },
     {
       "SITE": "-659",
@@ -294,10 +338,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 2,
       "CAP1HR1LN": 706,
-      "MAX_HOURLY_VOL": 906.0,
-      "PCT_OF_CAP": 128.0,
+      "MAX_HOURLY_VOL": 906,
+      "PCT_OF_CAP": 128,
       "DATE": "2023-10-03",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.245445,
+      "LONGITUDE": -111.658848
     },
     {
       "SITE": "-661",
@@ -307,10 +353,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 3,
       "CAP1HR1LN": 846,
-      "MAX_HOURLY_VOL": 1168.0,
-      "PCT_OF_CAP": 138.0,
+      "MAX_HOURLY_VOL": 1168,
+      "PCT_OF_CAP": 138,
       "DATE": "2023-10-10",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.312134,
+      "LONGITUDE": -111.674182
     },
     {
       "SITE": "-663",
@@ -323,7 +371,9 @@
       "MAX_HOURLY_VOL": null,
       "PCT_OF_CAP": null,
       "DATE": null,
-      "HOUR": null
+      "HOUR": null,
+      "LATITUDE": 40.323269,
+      "LONGITUDE": -111.903473
     },
     {
       "SITE": "-664",
@@ -333,10 +383,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 2,
       "CAP1HR1LN": 929,
-      "MAX_HOURLY_VOL": 59.0,
-      "PCT_OF_CAP": 6.0,
+      "MAX_HOURLY_VOL": 59,
+      "PCT_OF_CAP": 6,
       "DATE": "2023-10-12",
-      "HOUR": "H0000"
+      "HOUR": "H0000",
+      "LATITUDE": 40.142157,
+      "LONGITUDE": -111.601098
     },
     {
       "SITE": "-676",
@@ -346,10 +398,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 2,
       "CAP1HR1LN": 975,
-      "MAX_HOURLY_VOL": 709.0,
-      "PCT_OF_CAP": 73.0,
+      "MAX_HOURLY_VOL": 709,
+      "PCT_OF_CAP": 73,
       "DATE": "2023-09-06",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.432623,
+      "LONGITUDE": -111.847285
     },
     {
       "SITE": "-679",
@@ -359,10 +413,12 @@
       "LINK_FTCLASS": "Principal Arterial",
       "LANES": 2,
       "CAP1HR1LN": 975,
-      "MAX_HOURLY_VOL": 714.0,
-      "PCT_OF_CAP": 73.0,
+      "MAX_HOURLY_VOL": 714,
+      "PCT_OF_CAP": 73,
       "DATE": "2023-10-19",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 41.578344,
+      "LONGITUDE": -111.973381
     },
     {
       "SITE": "-320",
@@ -375,7 +431,9 @@
       "MAX_HOURLY_VOL": null,
       "PCT_OF_CAP": null,
       "DATE": null,
-      "HOUR": null
+      "HOUR": null,
+      "LATITUDE": 41.253946,
+      "LONGITUDE": -111.852044
     },
     {
       "SITE": "-322",
@@ -385,10 +443,12 @@
       "LINK_FTCLASS": "Minor Arterial",
       "LANES": 1,
       "CAP1HR1LN": 849,
-      "MAX_HOURLY_VOL": 613.0,
-      "PCT_OF_CAP": 72.0,
+      "MAX_HOURLY_VOL": 613,
+      "PCT_OF_CAP": 72,
       "DATE": "2023-10-04",
-      "HOUR": "H1900"
+      "HOUR": "H1900",
+      "LATITUDE": 40.619153,
+      "LONGITUDE": -111.786042
     },
     {
       "SITE": "-335",
@@ -398,10 +458,12 @@
       "LINK_FTCLASS": "Minor Arterial",
       "LANES": 2,
       "CAP1HR1LN": 815,
-      "MAX_HOURLY_VOL": 1116.0,
-      "PCT_OF_CAP": 137.0,
+      "MAX_HOURLY_VOL": 1116,
+      "PCT_OF_CAP": 137,
       "DATE": "2023-10-17",
-      "HOUR": "H1600"
+      "HOUR": "H1600",
+      "LATITUDE": 40.652842,
+      "LONGITUDE": -111.917948
     },
     {
       "SITE": "-409",
@@ -414,7 +476,9 @@
       "MAX_HOURLY_VOL": null,
       "PCT_OF_CAP": null,
       "DATE": null,
-      "HOUR": null
+      "HOUR": null,
+      "LATITUDE": 40.771384,
+      "LONGITUDE": -111.926512
     },
     {
       "SITE": "-657",
@@ -424,10 +488,12 @@
       "LINK_FTCLASS": "Minor Arterial",
       "LANES": 2,
       "CAP1HR1LN": 858,
-      "MAX_HOURLY_VOL": 976.0,
-      "PCT_OF_CAP": 114.0,
+      "MAX_HOURLY_VOL": 976,
+      "PCT_OF_CAP": 114,
       "DATE": "2023-09-26",
-      "HOUR": "H1500"
+      "HOUR": "H1500",
+      "LATITUDE": 40.369777,
+      "LONGITUDE": -111.975897
     },
     {
       "SITE": "-660",
@@ -437,10 +503,12 @@
       "LINK_FTCLASS": "Minor Arterial",
       "LANES": 2,
       "CAP1HR1LN": 858,
-      "MAX_HOURLY_VOL": 935.0,
-      "PCT_OF_CAP": 109.0,
+      "MAX_HOURLY_VOL": 935,
+      "PCT_OF_CAP": 109,
       "DATE": "2023-10-11",
-      "HOUR": "H0800"
+      "HOUR": "H0800",
+      "LATITUDE": 40.192026,
+      "LONGITUDE": -111.612332
     },
     {
       "SITE": "-662",
@@ -450,10 +518,12 @@
       "LINK_FTCLASS": "Minor Arterial",
       "LANES": 1,
       "CAP1HR1LN": 894,
-      "MAX_HOURLY_VOL": 983.0,
-      "PCT_OF_CAP": 110.0,
+      "MAX_HOURLY_VOL": 983,
+      "PCT_OF_CAP": 110,
       "DATE": "2023-11-14",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.399342,
+      "LONGITUDE": -111.886321
     },
     {
       "SITE": "-619",
@@ -466,7 +536,9 @@
       "MAX_HOURLY_VOL": null,
       "PCT_OF_CAP": null,
       "DATE": null,
-      "HOUR": null
+      "HOUR": null,
+      "LATITUDE": 40.725376,
+      "LONGITUDE": -112.038986
     },
     {
       "SITE": "-643",
@@ -476,10 +548,12 @@
       "LINK_FTCLASS": "Collector",
       "LANES": 1,
       "CAP1HR1LN": 770,
-      "MAX_HOURLY_VOL": 778.0,
-      "PCT_OF_CAP": 101.0,
+      "MAX_HOURLY_VOL": 778,
+      "PCT_OF_CAP": 101,
       "DATE": "2023-10-10",
-      "HOUR": "H1800"
+      "HOUR": "H1800",
+      "LATITUDE": 40.410319,
+      "LONGITUDE": -111.8302
     },
     {
       "SITE": "-601",
@@ -489,10 +563,12 @@
       "LINK_FTCLASS": "Collector",
       "LANES": 1,
       "CAP1HR1LN": 541,
-      "MAX_HOURLY_VOL": 480.0,
-      "PCT_OF_CAP": 89.0,
+      "MAX_HOURLY_VOL": 480,
+      "PCT_OF_CAP": 89,
       "DATE": "2023-10-04",
-      "HOUR": "H1900"
+      "HOUR": "H1900",
+      "LATITUDE": 40.43352,
+      "LONGITUDE": -111.738425
     },
     {
       "SITE": "-602",
@@ -502,10 +578,12 @@
       "LINK_FTCLASS": "Collector",
       "LANES": 1,
       "CAP1HR1LN": 566,
-      "MAX_HOURLY_VOL": 206.0,
-      "PCT_OF_CAP": 36.0,
+      "MAX_HOURLY_VOL": 206,
+      "PCT_OF_CAP": 36,
       "DATE": "2023-10-04",
-      "HOUR": "H1800"
+      "HOUR": "H1800",
+      "LATITUDE": 40.405315,
+      "LONGITUDE": -111.604715
     },
     {
       "SITE": "-312",
@@ -518,7 +596,9 @@
       "MAX_HOURLY_VOL": null,
       "PCT_OF_CAP": null,
       "DATE": null,
-      "HOUR": null
+      "HOUR": null,
+      "LATITUDE": 40.038281,
+      "LONGITUDE": -111.534617
     },
     {
       "SITE": "-416",
@@ -531,7 +611,9 @@
       "MAX_HOURLY_VOL": null,
       "PCT_OF_CAP": null,
       "DATE": null,
-      "HOUR": null
+      "HOUR": null,
+      "LATITUDE": 39.890502,
+      "LONGITUDE": -111.548663
     },
     {
       "SITE": "-634",
@@ -541,10 +623,12 @@
       "LINK_FTCLASS": "Expressway",
       "LANES": 2,
       "CAP1HR1LN": 868,
-      "MAX_HOURLY_VOL": 1180.0,
-      "PCT_OF_CAP": 136.0,
+      "MAX_HOURLY_VOL": 1180,
+      "PCT_OF_CAP": 136,
       "DATE": "2023-11-14",
-      "HOUR": "H0700"
+      "HOUR": "H0700",
+      "LATITUDE": 40.613708,
+      "LONGITUDE": -112.037736
     },
     {
       "SITE": "-648",
@@ -554,10 +638,12 @@
       "LINK_FTCLASS": "Expressway",
       "LANES": 2,
       "CAP1HR1LN": 837,
-      "MAX_HOURLY_VOL": 1223.0,
-      "PCT_OF_CAP": 146.0,
+      "MAX_HOURLY_VOL": 1223,
+      "PCT_OF_CAP": 146,
       "DATE": "2023-10-03",
-      "HOUR": "H0700"
+      "HOUR": "H0700",
+      "LATITUDE": 40.41308,
+      "LONGITUDE": -111.899598
     },
     {
       "SITE": "-327",
@@ -567,10 +653,12 @@
       "LINK_FTCLASS": "Expressway",
       "LANES": 2,
       "CAP1HR1LN": 948,
-      "MAX_HOURLY_VOL": 1081.0,
-      "PCT_OF_CAP": 114.0,
+      "MAX_HOURLY_VOL": 1081,
+      "PCT_OF_CAP": 114,
       "DATE": "2023-09-28",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.113338,
+      "LONGITUDE": -111.634242
     },
     {
       "SITE": "-350",
@@ -580,10 +668,12 @@
       "LINK_FTCLASS": "Expressway",
       "LANES": 2,
       "CAP1HR1LN": 948,
-      "MAX_HOURLY_VOL": 1461.0,
-      "PCT_OF_CAP": 154.0,
+      "MAX_HOURLY_VOL": 1461,
+      "PCT_OF_CAP": 154,
       "DATE": "2023-11-07",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.275905,
+      "LONGITUDE": -111.657356
     },
     {
       "SITE": "-632",
@@ -593,10 +683,12 @@
       "LINK_FTCLASS": "Expressway",
       "LANES": 3,
       "CAP1HR1LN": 919,
-      "MAX_HOURLY_VOL": 1141.0,
-      "PCT_OF_CAP": 124.0,
+      "MAX_HOURLY_VOL": 1141,
+      "PCT_OF_CAP": 124,
       "DATE": "2023-10-10",
-      "HOUR": "H1600"
+      "HOUR": "H1600",
+      "LATITUDE": 40.375894,
+      "LONGITUDE": -111.835822
     },
     {
       "SITE": "-636",
@@ -606,10 +698,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 3,
       "CAP1HR1LN": 1693,
-      "MAX_HOURLY_VOL": 1577.0,
-      "PCT_OF_CAP": 93.0,
+      "MAX_HOURLY_VOL": 1577,
+      "PCT_OF_CAP": 93,
       "DATE": "2023-10-31",
-      "HOUR": "H0800"
+      "HOUR": "H0800",
+      "LATITUDE": 40.49684,
+      "LONGITUDE": -111.913637
     },
     {
       "SITE": "-675",
@@ -619,10 +713,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 1,
       "CAP1HR1LN": 1693,
-      "MAX_HOURLY_VOL": 1363.0,
-      "PCT_OF_CAP": 81.0,
+      "MAX_HOURLY_VOL": 1363,
+      "PCT_OF_CAP": 81,
       "DATE": "2023-11-09",
-      "HOUR": "H0800"
+      "HOUR": "H0800",
+      "LATITUDE": 40.432411,
+      "LONGITUDE": -111.847294
     },
     {
       "SITE": "-307",
@@ -635,7 +731,9 @@
       "MAX_HOURLY_VOL": null,
       "PCT_OF_CAP": null,
       "DATE": null,
-      "HOUR": null
+      "HOUR": null,
+      "LATITUDE": 41.139109,
+      "LONGITUDE": -111.824158
     },
     {
       "SITE": "-315",
@@ -645,10 +743,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 4,
       "CAP1HR1LN": 1696,
-      "MAX_HOURLY_VOL": 2240.0,
-      "PCT_OF_CAP": 132.0,
+      "MAX_HOURLY_VOL": 2240,
+      "PCT_OF_CAP": 132,
       "DATE": "2023-11-08",
-      "HOUR": "H0700"
+      "HOUR": "H0700",
+      "LATITUDE": 40.948029,
+      "LONGITUDE": -111.891601
     },
     {
       "SITE": "-316",
@@ -661,7 +761,9 @@
       "MAX_HOURLY_VOL": null,
       "PCT_OF_CAP": null,
       "DATE": null,
-      "HOUR": null
+      "HOUR": null,
+      "LATITUDE": 41.084663,
+      "LONGITUDE": -111.911041
     },
     {
       "SITE": "-341",
@@ -671,10 +773,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 4,
       "CAP1HR1LN": 1696,
-      "MAX_HOURLY_VOL": 1948.0,
-      "PCT_OF_CAP": 115.0,
+      "MAX_HOURLY_VOL": 1948,
+      "PCT_OF_CAP": 115,
       "DATE": "2023-11-08",
-      "HOUR": "H0800"
+      "HOUR": "H0800",
+      "LATITUDE": 40.718028,
+      "LONGITUDE": -111.880191
     },
     {
       "SITE": "-348",
@@ -684,10 +788,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 4,
       "CAP1HR1LN": 1696,
-      "MAX_HOURLY_VOL": 2069.0,
-      "PCT_OF_CAP": 122.0,
+      "MAX_HOURLY_VOL": 2069,
+      "PCT_OF_CAP": 122,
       "DATE": "2023-09-07",
-      "HOUR": "H1600"
+      "HOUR": "H1600",
+      "LATITUDE": 41.19604,
+      "LONGITUDE": -112.000256
     },
     {
       "SITE": "-611",
@@ -697,10 +803,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 5,
       "CAP1HR1LN": 1644,
-      "MAX_HOURLY_VOL": 1794.0,
-      "PCT_OF_CAP": 109.0,
+      "MAX_HOURLY_VOL": 1794,
+      "PCT_OF_CAP": 109,
       "DATE": "2023-09-12",
-      "HOUR": "H0700"
+      "HOUR": "H0700",
+      "LATITUDE": 40.141369,
+      "LONGITUDE": -111.646487
     },
     {
       "SITE": "-612",
@@ -710,10 +818,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 3,
       "CAP1HR1LN": 1730,
-      "MAX_HOURLY_VOL": 1957.0,
-      "PCT_OF_CAP": 113.0,
+      "MAX_HOURLY_VOL": 1957,
+      "PCT_OF_CAP": 113,
       "DATE": "2023-10-17",
-      "HOUR": "H1600"
+      "HOUR": "H1600",
+      "LATITUDE": 41.067263,
+      "LONGITUDE": -111.970084
     },
     {
       "SITE": "-616",
@@ -723,10 +833,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 4,
       "CAP1HR1LN": 1696,
-      "MAX_HOURLY_VOL": 2200.0,
-      "PCT_OF_CAP": 130.0,
+      "MAX_HOURLY_VOL": 2200,
+      "PCT_OF_CAP": 130,
       "DATE": "2023-11-15",
-      "HOUR": "H1600"
+      "HOUR": "H1600",
+      "LATITUDE": 40.8506,
+      "LONGITUDE": -111.91224
     },
     {
       "SITE": "-624",
@@ -736,10 +848,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 2,
       "CAP1HR1LN": 1644,
-      "MAX_HOURLY_VOL": 1693.0,
-      "PCT_OF_CAP": 103.0,
+      "MAX_HOURLY_VOL": 1693,
+      "PCT_OF_CAP": 103,
       "DATE": "2023-09-06",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.840893,
+      "LONGITUDE": -111.942145
     },
     {
       "SITE": "-625",
@@ -749,10 +863,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 2,
       "CAP1HR1LN": 1644,
-      "MAX_HOURLY_VOL": 1723.0,
-      "PCT_OF_CAP": 105.0,
+      "MAX_HOURLY_VOL": 1723,
+      "PCT_OF_CAP": 105,
       "DATE": "2023-10-24",
-      "HOUR": "H0700"
+      "HOUR": "H0700",
+      "LATITUDE": 40.932964,
+      "LONGITUDE": -111.89285
     },
     {
       "SITE": "-668",
@@ -762,10 +878,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 4,
       "CAP1HR1LN": 1696,
-      "MAX_HOURLY_VOL": 2156.0,
-      "PCT_OF_CAP": 127.0,
+      "MAX_HOURLY_VOL": 2156,
+      "PCT_OF_CAP": 127,
       "DATE": "2023-10-12",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.221888,
+      "LONGITUDE": -111.671841
     },
     {
       "SITE": "-670",
@@ -775,10 +893,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 5,
       "CAP1HR1LN": 1644,
-      "MAX_HOURLY_VOL": 2162.0,
-      "PCT_OF_CAP": 132.0,
+      "MAX_HOURLY_VOL": 2162,
+      "PCT_OF_CAP": 132,
       "DATE": "2023-11-14",
-      "HOUR": "H1600"
+      "HOUR": "H1600",
+      "LATITUDE": 40.343262,
+      "LONGITUDE": -111.757886
     },
     {
       "SITE": "-671",
@@ -788,10 +908,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 5,
       "CAP1HR1LN": 1644,
-      "MAX_HOURLY_VOL": 2079.0,
-      "PCT_OF_CAP": 126.0,
+      "MAX_HOURLY_VOL": 2079,
+      "PCT_OF_CAP": 126,
       "DATE": "2023-09-12",
-      "HOUR": "H0800"
+      "HOUR": "H0800",
+      "LATITUDE": 40.367744,
+      "LONGITUDE": -111.796055
     },
     {
       "SITE": "-673",
@@ -801,10 +923,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 5,
       "CAP1HR1LN": 1644,
-      "MAX_HOURLY_VOL": 1995.0,
-      "PCT_OF_CAP": 121.0,
+      "MAX_HOURLY_VOL": 1995,
+      "PCT_OF_CAP": 121,
       "DATE": "2023-09-26",
-      "HOUR": "H1600"
+      "HOUR": "H1600",
+      "LATITUDE": 40.40317,
+      "LONGITUDE": -111.852098
     },
     {
       "SITE": "-674",
@@ -814,10 +938,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 5,
       "CAP1HR1LN": 1644,
-      "MAX_HOURLY_VOL": 2096.0,
-      "PCT_OF_CAP": 127.0,
+      "MAX_HOURLY_VOL": 2096,
+      "PCT_OF_CAP": 127,
       "DATE": "2023-09-26",
-      "HOUR": "H0700"
+      "HOUR": "H0700",
+      "LATITUDE": 40.438999,
+      "LONGITUDE": -111.89784
     },
     {
       "SITE": "-677",
@@ -827,10 +953,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 4,
       "CAP1HR1LN": 1696,
-      "MAX_HOURLY_VOL": 1956.0,
-      "PCT_OF_CAP": 115.0,
+      "MAX_HOURLY_VOL": 1956,
+      "PCT_OF_CAP": 115,
       "DATE": "2023-09-28",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.749001,
+      "LONGITUDE": -111.634015
     },
     {
       "SITE": "-340",
@@ -840,10 +968,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 3,
       "CAP1HR1LN": 1964,
-      "MAX_HOURLY_VOL": 1860.0,
-      "PCT_OF_CAP": 95.0,
+      "MAX_HOURLY_VOL": 1860,
+      "PCT_OF_CAP": 95,
       "DATE": "2023-10-31",
-      "HOUR": "H1600"
+      "HOUR": "H1600",
+      "LATITUDE": 40.764607,
+      "LONGITUDE": -111.928873
     },
     {
       "SITE": "-351",
@@ -853,10 +983,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 4,
       "CAP1HR1LN": 1871,
-      "MAX_HOURLY_VOL": 1978.0,
-      "PCT_OF_CAP": 106.0,
+      "MAX_HOURLY_VOL": 1978,
+      "PCT_OF_CAP": 106,
       "DATE": "2023-11-01",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.637943,
+      "LONGITUDE": -111.921034
     },
     {
       "SITE": "-353",
@@ -866,10 +998,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 4,
       "CAP1HR1LN": 1871,
-      "MAX_HOURLY_VOL": 2102.0,
-      "PCT_OF_CAP": 112.0,
+      "MAX_HOURLY_VOL": 2102,
+      "PCT_OF_CAP": 112,
       "DATE": "2023-09-12",
-      "HOUR": "H1600"
+      "HOUR": "H1600",
+      "LATITUDE": 40.713874,
+      "LONGITUDE": -111.954092
     },
     {
       "SITE": "-617",
@@ -879,10 +1013,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 3,
       "CAP1HR1LN": 1964,
-      "MAX_HOURLY_VOL": 1838.0,
-      "PCT_OF_CAP": 94.0,
+      "MAX_HOURLY_VOL": 1838,
+      "PCT_OF_CAP": 94,
       "DATE": "2023-10-25",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.648187,
+      "LONGITUDE": -111.808086
     },
     {
       "SITE": "-628",
@@ -892,10 +1028,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 2,
       "CAP1HR1LN": 2080,
-      "MAX_HOURLY_VOL": 1767.0,
-      "PCT_OF_CAP": 85.0,
+      "MAX_HOURLY_VOL": 1767,
+      "PCT_OF_CAP": 85,
       "DATE": "2023-10-10",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.834219,
+      "LONGITUDE": -111.922903
     },
     {
       "SITE": "-629",
@@ -905,10 +1043,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 5,
       "CAP1HR1LN": 1784,
-      "MAX_HOURLY_VOL": 1989.0,
-      "PCT_OF_CAP": 111.0,
+      "MAX_HOURLY_VOL": 1989,
+      "PCT_OF_CAP": 111,
       "DATE": "2023-09-27",
-      "HOUR": "H1500"
+      "HOUR": "H1500",
+      "LATITUDE": 40.707881,
+      "LONGITUDE": -111.90423
     },
     {
       "SITE": "-641",
@@ -918,10 +1058,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 5,
       "CAP1HR1LN": 1784,
-      "MAX_HOURLY_VOL": 1768.0,
-      "PCT_OF_CAP": 99.0,
+      "MAX_HOURLY_VOL": 1768,
+      "PCT_OF_CAP": 99,
       "DATE": "2023-10-26",
-      "HOUR": "H1600"
+      "HOUR": "H1600",
+      "LATITUDE": 40.318482,
+      "LONGITUDE": -111.726596
     },
     {
       "SITE": "-669",
@@ -931,10 +1073,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 5,
       "CAP1HR1LN": 1784,
-      "MAX_HOURLY_VOL": 1772.0,
-      "PCT_OF_CAP": 99.0,
+      "MAX_HOURLY_VOL": 1772,
+      "PCT_OF_CAP": 99,
       "DATE": "2023-11-09",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.284733,
+      "LONGITUDE": -111.725896
     },
     {
       "SITE": "-672",
@@ -944,10 +1088,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 5,
       "CAP1HR1LN": 1784,
-      "MAX_HOURLY_VOL": 2036.0,
-      "PCT_OF_CAP": 114.0,
+      "MAX_HOURLY_VOL": 2036,
+      "PCT_OF_CAP": 114,
       "DATE": "2023-11-15",
-      "HOUR": "H1600"
+      "HOUR": "H1600",
+      "LATITUDE": 40.383218,
+      "LONGITUDE": -111.830221
     },
     {
       "SITE": "-818",
@@ -960,7 +1106,9 @@
       "MAX_HOURLY_VOL": null,
       "PCT_OF_CAP": null,
       "DATE": null,
-      "HOUR": null
+      "HOUR": null,
+      "LATITUDE": 40.631094,
+      "LONGITUDE": -111.843873
     },
     {
       "SITE": "-349",
@@ -970,10 +1118,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 2,
       "CAP1HR1LN": 1944,
-      "MAX_HOURLY_VOL": 1798.0,
-      "PCT_OF_CAP": 92.0,
+      "MAX_HOURLY_VOL": 1798,
+      "PCT_OF_CAP": 92,
       "DATE": "2023-11-09",
-      "HOUR": "H1600"
+      "HOUR": "H1600",
+      "LATITUDE": 40.004882,
+      "LONGITUDE": -111.762202
     },
     {
       "SITE": "-613",
@@ -983,10 +1133,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 3,
       "CAP1HR1LN": 1767,
-      "MAX_HOURLY_VOL": 1102.0,
-      "PCT_OF_CAP": 62.0,
+      "MAX_HOURLY_VOL": 1102,
+      "PCT_OF_CAP": 62,
       "DATE": "2023-10-05",
-      "HOUR": "H1600"
+      "HOUR": "H1600",
+      "LATITUDE": 41.449186,
+      "LONGITUDE": -112.055613
     },
     {
       "SITE": "-615",
@@ -996,10 +1148,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 2,
       "CAP1HR1LN": 1767,
-      "MAX_HOURLY_VOL": 2023.0,
-      "PCT_OF_CAP": 114.0,
+      "MAX_HOURLY_VOL": 2023,
+      "PCT_OF_CAP": 114,
       "DATE": "2023-11-08",
-      "HOUR": "H0700"
+      "HOUR": "H0700",
+      "LATITUDE": 40.709231,
+      "LONGITUDE": -112.249415
     },
     {
       "SITE": "-638",
@@ -1009,10 +1163,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 2,
       "CAP1HR1LN": 1944,
-      "MAX_HOURLY_VOL": 1355.0,
-      "PCT_OF_CAP": 70.0,
+      "MAX_HOURLY_VOL": 1355,
+      "PCT_OF_CAP": 70,
       "DATE": "2023-10-19",
-      "HOUR": "H1000"
+      "HOUR": "H1000",
+      "LATITUDE": 39.965126,
+      "LONGITUDE": -111.786648
     },
     {
       "SITE": "-639",
@@ -1022,10 +1178,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 3,
       "CAP1HR1LN": 1944,
-      "MAX_HOURLY_VOL": 1535.0,
-      "PCT_OF_CAP": 79.0,
+      "MAX_HOURLY_VOL": 1535,
+      "PCT_OF_CAP": 79,
       "DATE": "2023-11-09",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.048419,
+      "LONGITUDE": -111.739698
     },
     {
       "SITE": "-655",
@@ -1035,10 +1193,12 @@
       "LINK_FTCLASS": "Freeway",
       "LANES": 3,
       "CAP1HR1LN": 1944,
-      "MAX_HOURLY_VOL": 1901.0,
-      "PCT_OF_CAP": 98.0,
+      "MAX_HOURLY_VOL": 1901,
+      "PCT_OF_CAP": 98,
       "DATE": "2023-11-09",
-      "HOUR": "H1700"
+      "HOUR": "H1700",
+      "LATITUDE": 40.107783,
+      "LONGITUDE": -111.677741
     }
   ],
   "ft_summary": [
@@ -1047,8 +1207,8 @@
       "LINK_FTCLASS": "Principal Arterial",
       "n_stations": 28,
       "n_with_volume": 22,
-      "max_of_max": 1181.0,
-      "avg_of_max": 888.0,
+      "max_of_max": 1181,
+      "avg_of_max": 888,
       "CAPLN1": 968,
       "CAPLN2": 929,
       "CAPLN3": 890,
@@ -1062,8 +1222,8 @@
       "LINK_FTCLASS": "Minor Arterial",
       "n_stations": 7,
       "n_with_volume": 5,
-      "max_of_max": 1116.0,
-      "avg_of_max": 925.0,
+      "max_of_max": 1116,
+      "avg_of_max": 925,
       "CAPLN1": 894,
       "CAPLN2": 858,
       "CAPLN3": 822,
@@ -1077,8 +1237,8 @@
       "LINK_FTCLASS": "Collector",
       "n_stations": 2,
       "n_with_volume": 1,
-      "max_of_max": 778.0,
-      "avg_of_max": 778.0,
+      "max_of_max": 778,
+      "avg_of_max": 778,
       "CAPLN1": 733,
       "CAPLN2": 703,
       "CAPLN3": 674,
@@ -1092,8 +1252,8 @@
       "LINK_FTCLASS": "Collector",
       "n_stations": 2,
       "n_with_volume": 2,
-      "max_of_max": 480.0,
-      "avg_of_max": 343.0,
+      "max_of_max": 480,
+      "avg_of_max": 343,
       "CAPLN1": 515,
       "CAPLN2": 494,
       "CAPLN3": 473,
@@ -1107,8 +1267,8 @@
       "LINK_FTCLASS": "Expressway",
       "n_stations": 3,
       "n_with_volume": 1,
-      "max_of_max": 1180.0,
-      "avg_of_max": 1180.0,
+      "max_of_max": 1180,
+      "avg_of_max": 1180,
       "CAPLN1": 1064,
       "CAPLN2": 1021,
       "CAPLN3": 990,
@@ -1122,8 +1282,8 @@
       "LINK_FTCLASS": "Expressway",
       "n_stations": 1,
       "n_with_volume": 1,
-      "max_of_max": 1223.0,
-      "avg_of_max": 1223.0,
+      "max_of_max": 1223,
+      "avg_of_max": 1223,
       "CAPLN1": 1026,
       "CAPLN2": 985,
       "CAPLN3": 954,
@@ -1137,8 +1297,8 @@
       "LINK_FTCLASS": "Expressway",
       "n_stations": 3,
       "n_with_volume": 3,
-      "max_of_max": 1461.0,
-      "avg_of_max": 1228.0,
+      "max_of_max": 1461,
+      "avg_of_max": 1228,
       "CAPLN1": 988,
       "CAPLN2": 948,
       "CAPLN3": 919,
@@ -1152,8 +1312,8 @@
       "LINK_FTCLASS": "Freeway",
       "n_stations": 2,
       "n_with_volume": 2,
-      "max_of_max": 1577.0,
-      "avg_of_max": 1470.0,
+      "max_of_max": 1577,
+      "avg_of_max": 1470,
       "CAPLN1": 1693,
       "CAPLN2": 1693,
       "CAPLN3": 1693,
@@ -1167,8 +1327,8 @@
       "LINK_FTCLASS": "Freeway",
       "n_stations": 16,
       "n_with_volume": 14,
-      "max_of_max": 2240.0,
-      "avg_of_max": 2005.0,
+      "max_of_max": 2240,
+      "avg_of_max": 2005,
       "CAPLN1": 1730,
       "CAPLN2": 1730,
       "CAPLN3": 1730,
@@ -1182,8 +1342,8 @@
       "LINK_FTCLASS": "Freeway",
       "n_stations": 10,
       "n_with_volume": 9,
-      "max_of_max": 2102.0,
-      "avg_of_max": 1901.0,
+      "max_of_max": 2102,
+      "avg_of_max": 1901,
       "CAPLN1": 2430,
       "CAPLN2": 2080,
       "CAPLN3": 1964,
@@ -1197,8 +1357,8 @@
       "LINK_FTCLASS": "Freeway",
       "n_stations": 6,
       "n_with_volume": 6,
-      "max_of_max": 2023.0,
-      "avg_of_max": 1619.0,
+      "max_of_max": 2023,
+      "avg_of_max": 1619,
       "CAPLN1": 1767,
       "CAPLN2": 1767,
       "CAPLN3": 1767,
@@ -1206,38 +1366,6 @@
       "CAPLN5": 1679,
       "CAPLN6": 1608,
       "CAPLN7": 1555
-    }
-  ],
-  "ft2_by_lane": [
-    {
-      "LANES": 1,
-      "n_stations": 2,
-      "n_with_volume": 1,
-      "max_of_max": 423.0,
-      "avg_of_max": 423.0,
-      "model_cap_per_lane": 968,
-      "pct_of_cap_at_max": 44.0,
-      "pct_of_cap_at_avg": 44.0
-    },
-    {
-      "LANES": 2,
-      "n_stations": 18,
-      "n_with_volume": 13,
-      "max_of_max": 1181.0,
-      "avg_of_max": 900.0,
-      "model_cap_per_lane": 929,
-      "pct_of_cap_at_max": 127.0,
-      "pct_of_cap_at_avg": 97.0
-    },
-    {
-      "LANES": 3,
-      "n_stations": 8,
-      "n_with_volume": 8,
-      "max_of_max": 1168.0,
-      "avg_of_max": 928.0,
-      "model_cap_per_lane": 890,
-      "pct_of_cap_at_max": 131.0,
-      "pct_of_cap_at_avg": 104.0
     }
   ]
 }

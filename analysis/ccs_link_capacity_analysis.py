@@ -121,6 +121,8 @@ def match_stations_to_links(gdf_ccs: gpd.GeoDataFrame, gdf_links: gpd.GeoDataFra
             {
                 "SITE": row["SITE"],
                 "SITE_DESCRIPTION": row.get("SITE_DESCRIPTION"),
+                "LATITUDE": row["LATITUDE"],
+                "LONGITUDE": row["LONGITUDE"],
                 "LINK_STREET": link["STREET"],
                 "LINKID": link["LINKID"],
                 "LINK_FT": link["FT"],
@@ -247,26 +249,26 @@ def lane_breakdown_for_ft(df: pd.DataFrame, ft: int) -> pd.DataFrame:
     return grp
 
 
-def write_dashboard_data(final: pd.DataFrame, summary: pd.DataFrame, ft2_by_lane: pd.DataFrame) -> None:
+def write_dashboard_data(final: pd.DataFrame, summary: pd.DataFrame) -> None:
     """Writes docs/data/capacity_data.json, the GitHub Pages dashboard's one
-    data file -- {"stations": [...], "ft_summary": [...], "ft2_by_lane": [...]},
-    all derived from the same tables as the CSV outputs so there's a single
-    source of truth for both. Everything the dashboard needs lives inside
-    docs/ -- GitHub Pages only serves that folder, so the dashboard must never
-    fetch a path outside it (e.g. ../output/)."""
+    data file -- {"stations": [...], "ft_summary": [...]}, derived from the
+    same tables as the CSV outputs so there's a single source of truth for
+    both. Everything the dashboard needs lives inside docs/ -- GitHub Pages
+    only serves that folder, so the dashboard must never fetch a path outside
+    it (e.g. ../output/)."""
     DASHBOARD_DATA_DIR.mkdir(parents=True, exist_ok=True)
 
     stations = final[
         [
-            "SITE", "SITE_DESCRIPTION", "LINK_STREET", "LINK_FT", "LINK_FTCLASS",
-            "LANES", "CAP1HR1LN", "MAX_HOURLY_VOL", "PCT_OF_CAP", "DATE", "HOUR",
+            "SITE", "SITE_DESCRIPTION", "LATITUDE", "LONGITUDE", "LINK_STREET",
+            "LINK_FT", "LINK_FTCLASS", "LANES", "CAP1HR1LN", "MAX_HOURLY_VOL",
+            "PCT_OF_CAP", "DATE", "HOUR",
         ]
     ].copy()
 
     payload = {
         "stations": stations.to_dict(orient="records"),
         "ft_summary": summary.to_dict(orient="records"),
-        "ft2_by_lane": ft2_by_lane.to_dict(orient="records"),
     }
     with open(DASHBOARD_DATA_DIR / "capacity_data.json", "w") as f:
         json.dump(_nan_to_none(payload), f, indent=2)
@@ -303,7 +305,7 @@ def main():
     arterial_by_lane = lane_breakdown_for_ft(final, ft=2)
     arterial_by_lane.to_csv(OUT_DIR / "ft2_principal_arterial_by_lane.csv", index=False)
 
-    write_dashboard_data(final, summary, arterial_by_lane)
+    write_dashboard_data(final, summary)
 
     print(f"{len(raw)} CCS stations matched, {len(final)} remaining after exclusions")
     print()
