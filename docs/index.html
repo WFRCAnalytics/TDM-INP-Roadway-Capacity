@@ -138,27 +138,19 @@
     color: var(--text-secondary); font-variant-numeric: normal;
   }
 
-  .cap-chart-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 20px 16px; margin: 22px 0 4px;
+  .cap-hbar-chart { display: flex; flex-direction: column; gap: 14px; margin: 22px 0 4px; }
+  .cap-hbar-row { display: flex; align-items: center; gap: 12px; }
+  .cap-hbar-label { flex: 0 0 190px; font-size: 0.82rem; text-align: right; }
+  .cap-hbar-track { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+  .cap-hbar-wrap { display: flex; align-items: center; gap: 8px; }
+  .cap-hbar {
+    flex: 0 0 auto; height: 14px; min-width: 2px;
+    background: var(--series-1); border-radius: 0 3px 3px 0;
   }
-  .cap-chart-title { font-size: 0.85rem; font-weight: 600; }
-  .cap-chart-sub { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; }
-  .cap-chart-bars {
-    display: flex; align-items: flex-end; gap: 3px;
-    height: 110px; padding-top: 18px;
-    border-bottom: 1px solid var(--baseline);
+  .cap-hbar-value {
+    font-size: 0.74rem; color: var(--text-secondary);
+    font-variant-numeric: tabular-nums; white-space: nowrap;
   }
-  .cap-bar {
-    flex: 1 1 0; min-height: 2px; position: relative;
-    background: var(--series-1); border-radius: 3px 3px 0 0;
-  }
-  .cap-bar-value {
-    position: absolute; top: -16px; left: 0; right: 0; text-align: center;
-    font-size: 0.68rem; color: var(--text-secondary); font-variant-numeric: tabular-nums;
-  }
-  .cap-chart-ticks { display: flex; gap: 3px; margin-top: 4px; }
-  .cap-chart-ticks span { flex: 1 1 0; text-align: center; font-size: 0.68rem; color: var(--text-muted); }
 
   footer { color: var(--text-muted); font-size: 0.82rem; margin: 30px 0 10px; }
 
@@ -210,7 +202,7 @@
     <select id="f-cap-lanes" multiple size="4"></select>
     <span class="legend-note">ctrl/cmd-click to select more than one</span>
   </div>
-  <div id="cap-chart-grid" class="cap-chart-grid"></div>
+  <div id="cap-chart-grid" class="cap-hbar-chart"></div>
   <p class="legend-note">
     FT 34 (Fwy: posted 65 mph) and FT 36 (Fwy: posted 75 mph) include an
     auxiliary lane (a short merge/weave lane, not a full through lane) in
@@ -399,17 +391,16 @@ function renderCapLookup(capLookup) {
     </tr>`).join("");
 }
 
-// --- Model capacity companion chart (small multiples, one per FT) --------
+// --- Model capacity companion chart (ranked horizontal bars, one row per FT) --
 function renderCapChart(capLookup) {
   const fts = [...new Map(capLookup.map(r => [r.LINK_FT, r.LINK_FTCLASS])).entries()]
     .sort((a, b) => a[0] - b[0]);
   const allLanes = [...new Set(capLookup.map(r => r.LANES))].sort((a, b) => a - b);
   const byFtLane = new Map(capLookup.map(r => [`${r.LINK_FT}|${r.LANES}`, r.CAP_PER_LANE]));
 
-  // Fixed scale from the full dataset, so bar heights stay comparable no
+  // Fixed scale from the full dataset, so bar widths stay comparable no
   // matter which lane counts are currently selected.
   const max = Math.max(...capLookup.map(r => r.CAP_PER_LANE));
-  const BAR_AREA_HEIGHT = 110;
 
   const laneSel = document.getElementById("f-cap-lanes");
   laneSel.innerHTML = allLanes.map(l =>
@@ -418,21 +409,21 @@ function renderCapChart(capLookup) {
 
   function draw(selectedLanes) {
     document.getElementById("cap-chart-grid").innerHTML = fts.map(([ft, ftclass]) => {
-      const bars = selectedLanes.map((l, i) => {
+      const bars = selectedLanes.map(l => {
         const v = byFtLane.get(`${ft}|${l}`);
-        if (v == null) return `<div class="cap-bar" style="height:0"></div>`;
-        const h = Math.max(2, Math.round((v / max) * BAR_AREA_HEIGHT));
+        if (v == null) return "";
+        const pct = Math.max(1, Math.round((v / max) * 100));
         const title = `${ftclass} (FT ${ft}), ${l} lane${l == 1 ? "" : "s"}: ${fmt0(v)} veh/hr/lane`;
-        const label = i === 0 ? `<span class="cap-bar-value">${fmt0(v)}</span>` : "";
-        return `<div class="cap-bar" style="height:${h}px" title="${title}">${label}</div>`;
+        return `
+          <div class="cap-hbar-wrap" title="${title}">
+            <div class="cap-hbar" style="width:${pct}%"></div>
+            <span class="cap-hbar-value">${fmt0(v)}</span>
+          </div>`;
       }).join("");
-      const ticks = selectedLanes.map(l => `<span>${l}</span>`).join("");
       return `
-        <div class="cap-chart-cell">
-          <div class="cap-chart-title">${ftclass}</div>
-          <div class="cap-chart-sub">FT ${ft}</div>
-          <div class="cap-chart-bars">${bars}</div>
-          <div class="cap-chart-ticks">${ticks}</div>
+        <div class="cap-hbar-row">
+          <div class="cap-hbar-label">${ftclass} (FT ${ft})</div>
+          <div class="cap-hbar-track">${bars}</div>
         </div>`;
     }).join("");
   }
