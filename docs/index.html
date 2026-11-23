@@ -140,7 +140,7 @@
 
   .cap-hbar-chart { display: flex; flex-direction: column; gap: 14px; margin: 22px 0 4px; }
   .cap-hbar-row { display: flex; align-items: center; gap: 12px; }
-  .cap-hbar-label { flex: 0 0 190px; font-size: 0.82rem; text-align: right; }
+  .cap-hbar-label { flex: 0 0 230px; font-size: 0.82rem; text-align: right; }
   .cap-hbar-track { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
   .cap-hbar-wrap { display: flex; align-items: center; gap: 8px; }
   .cap-hbar {
@@ -156,6 +156,8 @@
 
   @media (max-width: 640px) {
     .map-box { height: 300px; }
+    .cap-hbar-row { flex-direction: column; align-items: stretch; gap: 4px; }
+    .cap-hbar-label { flex: none; text-align: left; }
   }
 </style>
 </head>
@@ -395,6 +397,7 @@ function renderCapLookup(capLookup) {
 function renderCapChart(capLookup) {
   const fts = [...new Map(capLookup.map(r => [r.LINK_FT, r.LINK_FTCLASS])).entries()]
     .sort((a, b) => a[0] - b[0]);
+  const descByFt = new Map(capLookup.map(r => [r.LINK_FT, r.FT_DESCRIPTION]));
   const allLanes = [...new Set(capLookup.map(r => r.LANES))].sort((a, b) => a - b);
   const byFtLane = new Map(capLookup.map(r => [`${r.LINK_FT}|${r.LANES}`, r.CAP_PER_LANE]));
 
@@ -409,11 +412,12 @@ function renderCapChart(capLookup) {
 
   function draw(selectedLanes) {
     document.getElementById("cap-chart-grid").innerHTML = fts.map(([ft, ftclass]) => {
+      const desc = descByFt.get(ft) ?? ftclass;
       const bars = selectedLanes.map(l => {
         const v = byFtLane.get(`${ft}|${l}`);
         if (v == null) return "";
         const pct = Math.max(1, Math.round((v / max) * 100));
-        const title = `${ftclass} (FT ${ft}), ${l} lane${l == 1 ? "" : "s"}: ${fmt0(v)} veh/hr/lane`;
+        const title = `${desc}, ${l} lane${l == 1 ? "" : "s"}: ${fmt0(v)} veh/hr/lane`;
         return `
           <div class="cap-hbar-wrap" title="${title}">
             <div class="cap-hbar" style="width:${pct}%"></div>
@@ -422,7 +426,7 @@ function renderCapChart(capLookup) {
       }).join("");
       return `
         <div class="cap-hbar-row">
-          <div class="cap-hbar-label">${ftclass} (FT ${ft})</div>
+          <div class="cap-hbar-label">${desc}</div>
           <div class="cap-hbar-track">${bars}</div>
         </div>`;
     }).join("");
