@@ -293,19 +293,44 @@ def lane_breakdown_for_ft(df: pd.DataFrame, ft: int) -> pd.DataFrame:
     return grp
 
 
+# FT -> the TDM's own longer description, straight from its FT code list (not
+# derivable from any file in data/ -- FTCLASS in the link geopackage only
+# gives the broad group, e.g. "Freeway" for FT 30-39 alike). Notably this is
+# where "aux lane" is explicit: FT 34/36 include one, FT 33/35 don't.
+FT_DESCRIPTIONS = {
+    1: "Centroid Connector", 2: "Principal Arterial", 3: "Minor Arterial",
+    4: "Major Collector", 5: "Minor Collector", 6: "Local", 7: "Unpaved",
+    12: "Expressway, posted 60-70 mph", 13: "Expressway, posted 55-65 mph",
+    14: "Expressway, posted 50-60 mph", 15: "Expressway, posted 45-55 mph",
+    20: "MM: fwy-to-fwy loop ramp", 21: "MM: C-D road, flyover ramp",
+    22: "MM: posted 55-60 mph", 23: "MM: posted 65 mph, no aux lane",
+    24: "MM: posted 65 mph, aux lane", 25: "MM: posted 75 mph, no aux lane",
+    26: "MM: posted 75 mph, aux lane", 27: "Placeholder",
+    28: "MM: On-ramp", 29: "MM: Off-ramp",
+    30: "Fwy: fwy-to-fwy loop ramp", 31: "Fwy: C-D road, flyover ramp",
+    32: "Fwy: posted 55-60 mph", 33: "Fwy: posted 65 mph, no aux lane",
+    34: "Fwy: posted 65 mph, aux lane", 35: "Fwy: posted 75 mph, no aux lane",
+    36: "Fwy: posted 75 mph, aux lane", 37: "Fwy: HOV lane",
+    38: "Fwy: Managed lane", 39: "Fwy: Managed lane access",
+    40: "Fwy: Tollway", 41: "Fwy: On-ramp", 42: "Fwy: Off-ramp",
+}
+
+
 def capacity_lookup_for_dashboard(final: pd.DataFrame) -> pd.DataFrame:
-    """Long-format {LINK_FT, LINK_FTCLASS, LANES, CAP_PER_LANE} -- the model's
-    own spdcap assumption for every lane count 1-7, for every facility type
-    this dashboard actually covers (the FTs present in `final`, year-
-    independent so this isn't duplicated per year). Not derived from any CCS
-    observation -- this is the model's input assumption, not an output."""
+    """Long-format {LINK_FT, LINK_FTCLASS, FT_DESCRIPTION, LANES,
+    CAP_PER_LANE} -- the model's own spdcap assumption for every lane count
+    1-7, for every facility type this dashboard actually covers (the FTs
+    present in `final`, year-independent so this isn't duplicated per year).
+    Not derived from any CCS observation -- this is the model's input
+    assumption, not an output."""
     lut = spdcap_lookup_table()
     cap_cols = [c for c in lut.columns if c.startswith("CAPLN")]
 
     fts = final[["LINK_FT", "LINK_FTCLASS"]].drop_duplicates().sort_values("LINK_FT")
+    fts["FT_DESCRIPTION"] = fts["LINK_FT"].map(FT_DESCRIPTIONS)
     long = fts.merge(lut[["FT"] + cap_cols], left_on="LINK_FT", right_on="FT", how="left").drop(columns=["FT"])
     long = long.melt(
-        id_vars=["LINK_FT", "LINK_FTCLASS"], value_vars=cap_cols,
+        id_vars=["LINK_FT", "LINK_FTCLASS", "FT_DESCRIPTION"], value_vars=cap_cols,
         var_name="LANES", value_name="CAP_PER_LANE",
     )
     long["LANES"] = long["LANES"].str.replace("CAPLN", "", regex=False).astype(int)

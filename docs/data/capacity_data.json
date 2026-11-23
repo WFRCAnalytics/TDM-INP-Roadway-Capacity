@@ -5831,462 +5831,539 @@
     {
       "LINK_FT": 2,
       "LINK_FTCLASS": "Principal Arterial",
+      "FT_DESCRIPTION": "Principal Arterial",
       "LANES": 1,
       "CAP_PER_LANE": 968
     },
     {
       "LINK_FT": 2,
       "LINK_FTCLASS": "Principal Arterial",
+      "FT_DESCRIPTION": "Principal Arterial",
       "LANES": 2,
       "CAP_PER_LANE": 929
     },
     {
       "LINK_FT": 2,
       "LINK_FTCLASS": "Principal Arterial",
+      "FT_DESCRIPTION": "Principal Arterial",
       "LANES": 3,
       "CAP_PER_LANE": 890
     },
     {
       "LINK_FT": 2,
       "LINK_FTCLASS": "Principal Arterial",
+      "FT_DESCRIPTION": "Principal Arterial",
       "LANES": 4,
       "CAP_PER_LANE": 869
     },
     {
       "LINK_FT": 2,
       "LINK_FTCLASS": "Principal Arterial",
+      "FT_DESCRIPTION": "Principal Arterial",
       "LANES": 5,
       "CAP_PER_LANE": 849
     },
     {
       "LINK_FT": 2,
       "LINK_FTCLASS": "Principal Arterial",
+      "FT_DESCRIPTION": "Principal Arterial",
       "LANES": 6,
       "CAP_PER_LANE": 830
     },
     {
       "LINK_FT": 2,
       "LINK_FTCLASS": "Principal Arterial",
+      "FT_DESCRIPTION": "Principal Arterial",
       "LANES": 7,
       "CAP_PER_LANE": 810
     },
     {
       "LINK_FT": 3,
       "LINK_FTCLASS": "Minor Arterial",
+      "FT_DESCRIPTION": "Minor Arterial",
       "LANES": 1,
       "CAP_PER_LANE": 894
     },
     {
       "LINK_FT": 3,
       "LINK_FTCLASS": "Minor Arterial",
+      "FT_DESCRIPTION": "Minor Arterial",
       "LANES": 2,
       "CAP_PER_LANE": 858
     },
     {
       "LINK_FT": 3,
       "LINK_FTCLASS": "Minor Arterial",
+      "FT_DESCRIPTION": "Minor Arterial",
       "LANES": 3,
       "CAP_PER_LANE": 822
     },
     {
       "LINK_FT": 3,
       "LINK_FTCLASS": "Minor Arterial",
+      "FT_DESCRIPTION": "Minor Arterial",
       "LANES": 4,
       "CAP_PER_LANE": 803
     },
     {
       "LINK_FT": 3,
       "LINK_FTCLASS": "Minor Arterial",
+      "FT_DESCRIPTION": "Minor Arterial",
       "LANES": 5,
       "CAP_PER_LANE": 784
     },
     {
       "LINK_FT": 3,
       "LINK_FTCLASS": "Minor Arterial",
+      "FT_DESCRIPTION": "Minor Arterial",
       "LANES": 6,
       "CAP_PER_LANE": 766
     },
     {
       "LINK_FT": 3,
       "LINK_FTCLASS": "Minor Arterial",
+      "FT_DESCRIPTION": "Minor Arterial",
       "LANES": 7,
       "CAP_PER_LANE": 748
     },
     {
       "LINK_FT": 4,
       "LINK_FTCLASS": "Collector",
+      "FT_DESCRIPTION": "Major Collector",
       "LANES": 1,
       "CAP_PER_LANE": 733
     },
     {
       "LINK_FT": 4,
       "LINK_FTCLASS": "Collector",
+      "FT_DESCRIPTION": "Major Collector",
       "LANES": 2,
       "CAP_PER_LANE": 703
     },
     {
       "LINK_FT": 4,
       "LINK_FTCLASS": "Collector",
+      "FT_DESCRIPTION": "Major Collector",
       "LANES": 3,
       "CAP_PER_LANE": 674
     },
     {
       "LINK_FT": 4,
       "LINK_FTCLASS": "Collector",
+      "FT_DESCRIPTION": "Major Collector",
       "LANES": 4,
       "CAP_PER_LANE": 658
     },
     {
       "LINK_FT": 4,
       "LINK_FTCLASS": "Collector",
+      "FT_DESCRIPTION": "Major Collector",
       "LANES": 5,
       "CAP_PER_LANE": 643
     },
     {
       "LINK_FT": 4,
       "LINK_FTCLASS": "Collector",
+      "FT_DESCRIPTION": "Major Collector",
       "LANES": 6,
       "CAP_PER_LANE": 628
     },
     {
       "LINK_FT": 4,
       "LINK_FTCLASS": "Collector",
+      "FT_DESCRIPTION": "Major Collector",
       "LANES": 7,
       "CAP_PER_LANE": 613
     },
     {
       "LINK_FT": 5,
       "LINK_FTCLASS": "Collector",
+      "FT_DESCRIPTION": "Minor Collector",
       "LANES": 1,
       "CAP_PER_LANE": 515
     },
     {
       "LINK_FT": 5,
       "LINK_FTCLASS": "Collector",
+      "FT_DESCRIPTION": "Minor Collector",
       "LANES": 2,
       "CAP_PER_LANE": 494
     },
     {
       "LINK_FT": 5,
       "LINK_FTCLASS": "Collector",
+      "FT_DESCRIPTION": "Minor Collector",
       "LANES": 3,
       "CAP_PER_LANE": 473
     },
     {
       "LINK_FT": 5,
       "LINK_FTCLASS": "Collector",
+      "FT_DESCRIPTION": "Minor Collector",
       "LANES": 4,
       "CAP_PER_LANE": 462
     },
     {
       "LINK_FT": 5,
       "LINK_FTCLASS": "Collector",
+      "FT_DESCRIPTION": "Minor Collector",
       "LANES": 5,
       "CAP_PER_LANE": 451
     },
     {
       "LINK_FT": 5,
       "LINK_FTCLASS": "Collector",
+      "FT_DESCRIPTION": "Minor Collector",
       "LANES": 6,
       "CAP_PER_LANE": 441
     },
     {
       "LINK_FT": 5,
       "LINK_FTCLASS": "Collector",
+      "FT_DESCRIPTION": "Minor Collector",
       "LANES": 7,
       "CAP_PER_LANE": 431
     },
     {
       "LINK_FT": 13,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 55-65 mph",
       "LANES": 1,
       "CAP_PER_LANE": 1064
     },
     {
       "LINK_FT": 13,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 55-65 mph",
       "LANES": 2,
       "CAP_PER_LANE": 1021
     },
     {
       "LINK_FT": 13,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 55-65 mph",
       "LANES": 3,
       "CAP_PER_LANE": 990
     },
     {
       "LINK_FT": 13,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 55-65 mph",
       "LANES": 4,
       "CAP_PER_LANE": 968
     },
     {
       "LINK_FT": 13,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 55-65 mph",
       "LANES": 5,
       "CAP_PER_LANE": 947
     },
     {
       "LINK_FT": 13,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 55-65 mph",
       "LANES": 6,
       "CAP_PER_LANE": 927
     },
     {
       "LINK_FT": 13,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 55-65 mph",
       "LANES": 7,
       "CAP_PER_LANE": 907
     },
     {
       "LINK_FT": 14,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 50-60 mph",
       "LANES": 1,
       "CAP_PER_LANE": 1026
     },
     {
       "LINK_FT": 14,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 50-60 mph",
       "LANES": 2,
       "CAP_PER_LANE": 985
     },
     {
       "LINK_FT": 14,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 50-60 mph",
       "LANES": 3,
       "CAP_PER_LANE": 954
     },
     {
       "LINK_FT": 14,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 50-60 mph",
       "LANES": 4,
       "CAP_PER_LANE": 934
     },
     {
       "LINK_FT": 14,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 50-60 mph",
       "LANES": 5,
       "CAP_PER_LANE": 914
     },
     {
       "LINK_FT": 14,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 50-60 mph",
       "LANES": 6,
       "CAP_PER_LANE": 894
     },
     {
       "LINK_FT": 14,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 50-60 mph",
       "LANES": 7,
       "CAP_PER_LANE": 875
     },
     {
       "LINK_FT": 15,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 45-55 mph",
       "LANES": 1,
       "CAP_PER_LANE": 988
     },
     {
       "LINK_FT": 15,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 45-55 mph",
       "LANES": 2,
       "CAP_PER_LANE": 948
     },
     {
       "LINK_FT": 15,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 45-55 mph",
       "LANES": 3,
       "CAP_PER_LANE": 919
     },
     {
       "LINK_FT": 15,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 45-55 mph",
       "LANES": 4,
       "CAP_PER_LANE": 899
     },
     {
       "LINK_FT": 15,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 45-55 mph",
       "LANES": 5,
       "CAP_PER_LANE": 880
     },
     {
       "LINK_FT": 15,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 45-55 mph",
       "LANES": 6,
       "CAP_PER_LANE": 861
     },
     {
       "LINK_FT": 15,
       "LINK_FTCLASS": "Expressway",
+      "FT_DESCRIPTION": "Expressway, posted 45-55 mph",
       "LANES": 7,
       "CAP_PER_LANE": 842
     },
     {
       "LINK_FT": 32,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 55-60 mph",
       "LANES": 1,
       "CAP_PER_LANE": 1693
     },
     {
       "LINK_FT": 32,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 55-60 mph",
       "LANES": 2,
       "CAP_PER_LANE": 1693
     },
     {
       "LINK_FT": 32,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 55-60 mph",
       "LANES": 3,
       "CAP_PER_LANE": 1693
     },
     {
       "LINK_FT": 32,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 55-60 mph",
       "LANES": 4,
       "CAP_PER_LANE": 1660
     },
     {
       "LINK_FT": 32,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 55-60 mph",
       "LANES": 5,
       "CAP_PER_LANE": 1609
     },
     {
       "LINK_FT": 32,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 55-60 mph",
       "LANES": 6,
       "CAP_PER_LANE": 1541
     },
     {
       "LINK_FT": 32,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 55-60 mph",
       "LANES": 7,
       "CAP_PER_LANE": 1490
     },
     {
       "LINK_FT": 33,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 65 mph, no aux lane",
       "LANES": 1,
       "CAP_PER_LANE": 1730
     },
     {
       "LINK_FT": 33,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 65 mph, no aux lane",
       "LANES": 2,
       "CAP_PER_LANE": 1730
     },
     {
       "LINK_FT": 33,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 65 mph, no aux lane",
       "LANES": 3,
       "CAP_PER_LANE": 1730
     },
     {
       "LINK_FT": 33,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 65 mph, no aux lane",
       "LANES": 4,
       "CAP_PER_LANE": 1696
     },
     {
       "LINK_FT": 33,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 65 mph, no aux lane",
       "LANES": 5,
       "CAP_PER_LANE": 1644
     },
     {
       "LINK_FT": 33,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 65 mph, no aux lane",
       "LANES": 6,
       "CAP_PER_LANE": 1574
     },
     {
       "LINK_FT": 33,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 65 mph, no aux lane",
       "LANES": 7,
       "CAP_PER_LANE": 1523
     },
     {
       "LINK_FT": 34,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 65 mph, aux lane",
       "LANES": 1,
       "CAP_PER_LANE": 2430
     },
     {
       "LINK_FT": 34,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 65 mph, aux lane",
       "LANES": 2,
       "CAP_PER_LANE": 2080
     },
     {
       "LINK_FT": 34,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 65 mph, aux lane",
       "LANES": 3,
       "CAP_PER_LANE": 1964
     },
     {
       "LINK_FT": 34,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 65 mph, aux lane",
       "LANES": 4,
       "CAP_PER_LANE": 1871
     },
     {
       "LINK_FT": 34,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 65 mph, aux lane",
       "LANES": 5,
       "CAP_PER_LANE": 1784
     },
     {
       "LINK_FT": 34,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 65 mph, aux lane",
       "LANES": 6,
       "CAP_PER_LANE": 1691
     },
     {
       "LINK_FT": 34,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 65 mph, aux lane",
       "LANES": 7,
       "CAP_PER_LANE": 1623
     },
     {
       "LINK_FT": 35,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 75 mph, no aux lane",
       "LANES": 1,
       "CAP_PER_LANE": 1767
     },
     {
       "LINK_FT": 35,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 75 mph, no aux lane",
       "LANES": 2,
       "CAP_PER_LANE": 1767
     },
     {
       "LINK_FT": 35,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 75 mph, no aux lane",
       "LANES": 3,
       "CAP_PER_LANE": 1767
     },
     {
       "LINK_FT": 35,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 75 mph, no aux lane",
       "LANES": 4,
       "CAP_PER_LANE": 1732
     },
     {
       "LINK_FT": 35,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 75 mph, no aux lane",
       "LANES": 5,
       "CAP_PER_LANE": 1679
     },
     {
       "LINK_FT": 35,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 75 mph, no aux lane",
       "LANES": 6,
       "CAP_PER_LANE": 1608
     },
     {
       "LINK_FT": 35,
       "LINK_FTCLASS": "Freeway",
+      "FT_DESCRIPTION": "Fwy: posted 75 mph, no aux lane",
       "LANES": 7,
       "CAP_PER_LANE": 1555
     }

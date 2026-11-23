@@ -133,6 +133,10 @@
     padding: 8px 6px; border-radius: 4px;
     font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap;
   }
+  .heatmap-table td.desc {
+    text-align: left; font-weight: 400; white-space: normal;
+    color: var(--text-secondary); font-variant-numeric: normal;
+  }
 
   .cap-chart-grid {
     display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -201,12 +205,17 @@
       <tbody></tbody>
     </table>
   </div>
+  <div class="filters">
+    <label for="f-cap-lanes">Lanes shown in chart</label>
+    <select id="f-cap-lanes" multiple size="4"></select>
+    <span class="legend-note">ctrl/cmd-click to select more than one</span>
+  </div>
   <div id="cap-chart-grid" class="cap-chart-grid"></div>
   <p class="legend-note">
-    Some lane counts in the underlying network data include an auxiliary lane
-    (e.g. a short merge/weave or turn lane) rather than a full continuous
-    through lane, which this table and chart can't distinguish from the rest
-    &mdash; keep that in mind when comparing capacity across lane counts.
+    FT 34 (Fwy: posted 65 mph) and FT 36 (Fwy: posted 75 mph) include an
+    auxiliary lane (a short merge/weave lane, not a full through lane) in
+    their lane count &mdash; keep that in mind comparing their capacity to
+    FT 33/35, the equivalent freeway types without one.
   </p>
 </section>
 
@@ -364,15 +373,19 @@ function renderCapLookup(capLookup) {
   document.getElementById("cap-scale-min").textContent = fmt0(min);
   document.getElementById("cap-scale-max").textContent = fmt0(max) + " veh/hr/lane";
 
+  const descByFt = new Map(capLookup.map(r => [r.LINK_FT, r.FT_DESCRIPTION]));
+
   document.querySelector("#table-cap thead").innerHTML = `
     <tr>
       <th>Facility type</th>
+      <th>Description</th>
       ${lanes.map(l => `<th class="num">${l} lane${l == 1 ? "" : "s"}</th>`).join("")}
     </tr>`;
 
   document.querySelector("#table-cap tbody").innerHTML = fts.map(([ft, ftclass]) => `
     <tr>
       <th scope="row">${ftclass} (FT ${ft})</th>
+      <td class="desc">${descByFt.get(ft) ?? "–"}</td>
       ${lanes.map(l => {
         const v = byFtLane.get(`${ft}|${l}`);
         if (v == null) return `<td class="num">–</td>`;
@@ -390,30 +403,45 @@ function renderCapLookup(capLookup) {
 function renderCapChart(capLookup) {
   const fts = [...new Map(capLookup.map(r => [r.LINK_FT, r.LINK_FTCLASS])).entries()]
     .sort((a, b) => a[0] - b[0]);
-  const lanes = [...new Set(capLookup.map(r => r.LANES))].sort((a, b) => a - b);
+  const allLanes = [...new Set(capLookup.map(r => r.LANES))].sort((a, b) => a - b);
   const byFtLane = new Map(capLookup.map(r => [`${r.LINK_FT}|${r.LANES}`, r.CAP_PER_LANE]));
 
+  // Fixed scale from the full dataset, so bar heights stay comparable no
+  // matter which lane counts are currently selected.
   const max = Math.max(...capLookup.map(r => r.CAP_PER_LANE));
   const BAR_AREA_HEIGHT = 110;
 
-  document.getElementById("cap-chart-grid").innerHTML = fts.map(([ft, ftclass]) => {
-    const bars = lanes.map((l, i) => {
-      const v = byFtLane.get(`${ft}|${l}`);
-      if (v == null) return `<div class="cap-bar" style="height:0"></div>`;
-      const h = Math.max(2, Math.round((v / max) * BAR_AREA_HEIGHT));
-      const title = `${ftclass} (FT ${ft}), ${l} lane${l == 1 ? "" : "s"}: ${fmt0(v)} veh/hr/lane`;
-      const label = i === 0 ? `<span class="cap-bar-value">${fmt0(v)}</span>` : "";
-      return `<div class="cap-bar" style="height:${h}px" title="${title}">${label}</div>`;
+  const laneSel = document.getElementById("f-cap-lanes");
+  laneSel.innerHTML = allLanes.map(l =>
+    `<option value="${l}"${l === 1 ? " selected" : ""}>${l} lane${l == 1 ? "" : "s"}</option>`
+  ).join("");
+
+  function draw(selectedLanes) {
+    document.getElementById("cap-chart-grid").innerHTML = fts.map(([ft, ftclass]) => {
+      const bars = selectedLanes.map((l, i) => {
+        const v = byFtLane.get(`${ft}|${l}`);
+        if (v == null) return `<div class="cap-bar" style="height:0"></div>`;
+        const h = Math.max(2, Math.round((v / max) * BAR_AREA_HEIGHT));
+        const title = `${ftclass} (FT ${ft}), ${l} lane${l == 1 ? "" : "s"}: ${fmt0(v)} veh/hr/lane`;
+        const label = i === 0 ? `<span class="cap-bar-value">${fmt0(v)}</span>` : "";
+        return `<div class="cap-bar" style="height:${h}px" title="${title}">${label}</div>`;
+      }).join("");
+      const ticks = selectedLanes.map(l => `<span>${l}</span>`).join("");
+      return `
+        <div class="cap-chart-cell">
+          <div class="cap-chart-title">${ftclass}</div>
+          <div class="cap-chart-sub">FT ${ft}</div>
+          <div class="cap-chart-bars">${bars}</div>
+          <div class="cap-chart-ticks">${ticks}</div>
+        </div>`;
     }).join("");
-    const ticks = lanes.map(l => `<span>${l}</span>`).join("");
-    return `
-      <div class="cap-chart-cell">
-        <div class="cap-chart-title">${ftclass}</div>
-        <div class="cap-chart-sub">FT ${ft}</div>
-        <div class="cap-chart-bars">${bars}</div>
-        <div class="cap-chart-ticks">${ticks}</div>
-      </div>`;
-  }).join("");
+  }
+
+  draw([1]);
+  laneSel.addEventListener("change", () => {
+    const selected = [...laneSel.selectedOptions].map(o => Number(o.value)).sort((a, b) => a - b);
+    draw(selected.length ? selected : [1]);
+  });
 }
 
 // --- Facility-type map + list ---------------------------------------------

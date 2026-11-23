@@ -1,78 +1,78 @@
-LINK_FT,LINK_FTCLASS,LANES,CAP_PER_LANE
-2,Principal Arterial,1,968
-2,Principal Arterial,2,929
-2,Principal Arterial,3,890
-2,Principal Arterial,4,869
-2,Principal Arterial,5,849
-2,Principal Arterial,6,830
-2,Principal Arterial,7,810
-3,Minor Arterial,1,894
-3,Minor Arterial,2,858
-3,Minor Arterial,3,822
-3,Minor Arterial,4,803
-3,Minor Arterial,5,784
-3,Minor Arterial,6,766
-3,Minor Arterial,7,748
-4,Collector,1,733
-4,Collector,2,703
-4,Collector,3,674
-4,Collector,4,658
-4,Collector,5,643
-4,Collector,6,628
-4,Collector,7,613
-5,Collector,1,515
-5,Collector,2,494
-5,Collector,3,473
-5,Collector,4,462
-5,Collector,5,451
-5,Collector,6,441
-5,Collector,7,431
-13,Expressway,1,1064
-13,Expressway,2,1021
-13,Expressway,3,990
-13,Expressway,4,968
-13,Expressway,5,947
-13,Expressway,6,927
-13,Expressway,7,907
-14,Expressway,1,1026
-14,Expressway,2,985
-14,Expressway,3,954
-14,Expressway,4,934
-14,Expressway,5,914
-14,Expressway,6,894
-14,Expressway,7,875
-15,Expressway,1,988
-15,Expressway,2,948
-15,Expressway,3,919
-15,Expressway,4,899
-15,Expressway,5,880
-15,Expressway,6,861
-15,Expressway,7,842
-32,Freeway,1,1693
-32,Freeway,2,1693
-32,Freeway,3,1693
-32,Freeway,4,1660
-32,Freeway,5,1609
-32,Freeway,6,1541
-32,Freeway,7,1490
-33,Freeway,1,1730
-33,Freeway,2,1730
-33,Freeway,3,1730
-33,Freeway,4,1696
-33,Freeway,5,1644
-33,Freeway,6,1574
-33,Freeway,7,1523
-34,Freeway,1,2430
-34,Freeway,2,2080
-34,Freeway,3,1964
-34,Freeway,4,1871
-34,Freeway,5,1784
-34,Freeway,6,1691
-34,Freeway,7,1623
-35,Freeway,1,1767
-35,Freeway,2,1767
-35,Freeway,3,1767
-35,Freeway,4,1732
-35,Freeway,5,1679
-35,Freeway,6,1608
-35,Freeway,7,1555
+LINK_FT,LINK_FTCLASS,FT_DESCRIPTION,LANES,CAP_PER_LANE
+2,Principal Arterial,Principal Arterial,1,968
+2,Principal Arterial,Principal Arterial,2,929
+2,Principal Arterial,Principal Arterial,3,890
+2,Principal Arterial,Principal Arterial,4,869
+2,Principal Arterial,Principal Arterial,5,849
+2,Principal Arterial,Principal Arterial,6,830
+2,Principal Arterial,Principal Arterial,7,810
+3,Minor Arterial,Minor Arterial,1,894
+3,Minor Arterial,Minor Arterial,2,858
+3,Minor Arterial,Minor Arterial,3,822
+3,Minor Arterial,Minor Arterial,4,803
+3,Minor Arterial,Minor Arterial,5,784
+3,Minor Arterial,Minor Arterial,6,766
+3,Minor Arterial,Minor Arterial,7,748
+4,Collector,Major Collector,1,733
+4,Collector,Major Collector,2,703
+4,Collector,Major Collector,3,674
+4,Collector,Major Collector,4,658
+4,Collector,Major Collector,5,643
+4,Collector,Major Collector,6,628
+4,Collector,Major Collector,7,613
+5,Collector,Minor Collector,1,515
+5,Collector,Minor Collector,2,494
+5,Collector,Minor Collector,3,473
+5,Collector,Minor Collector,4,462
+5,Collector,Minor Collector,5,451
+5,Collector,Minor Collector,6,441
+5,Collector,Minor Collector,7,431
+13,Expressway,"Expressway, posted 55-65 mph",1,1064
+13,Expressway,"Expressway, posted 55-65 mph",2,1021
+13,Expressway,"Expressway, posted 55-65 mph",3,990
+13,Expressway,"Expressway, posted 55-65 mph",4,968
+13,Expressway,"Expressway, posted 55-65 mph",5,947
+13,Expressway,"Expressway, posted 55-65 mph",6,927
+13,Expressway,"Expressway, posted 55-65 mph",7,907
+14,Expressway,"Expressway, posted 50-60 mph",1,1026
+14,Expressway,"Expressway, posted 50-60 mph",2,985
+14,Expressway,"Expressway, posted 50-60 mph",3,954
+14,Expressway,"Expressway, posted 50-60 mph",4,934
+14,Expressway,"Expressway, posted 50-60 mph",5,914
+14,Expressway,"Expressway, posted 50-60 mph",6,894
+14,Expressway,"Expressway, posted 50-60 mph",7,875
+15,Expressway,"Expressway, posted 45-55 mph",1,988
+15,Expressway,"Expressway, posted 45-55 mph",2,948
+15,Expressway,"Expressway, posted 45-55 mph",3,919
+15,Expressway,"Expressway, posted 45-55 mph",4,899
+15,Expressway,"Expressway, posted 45-55 mph",5,880
+15,Expressway,"Expressway, posted 45-55 mph",6,861
+15,Expressway,"Expressway, posted 45-55 mph",7,842
+32,Freeway,Fwy: posted 55-60 mph,1,1693
+32,Freeway,Fwy: posted 55-60 mph,2,1693
+32,Freeway,Fwy: posted 55-60 mph,3,1693
+32,Freeway,Fwy: posted 55-60 mph,4,1660
+32,Freeway,Fwy: posted 55-60 mph,5,1609
+32,Freeway,Fwy: posted 55-60 mph,6,1541
+32,Freeway,Fwy: posted 55-60 mph,7,1490
+33,Freeway,"Fwy: posted 65 mph, no aux lane",1,1730
+33,Freeway,"Fwy: posted 65 mph, no aux lane",2,1730
+33,Freeway,"Fwy: posted 65 mph, no aux lane",3,1730
+33,Freeway,"Fwy: posted 65 mph, no aux lane",4,1696
+33,Freeway,"Fwy: posted 65 mph, no aux lane",5,1644
+33,Freeway,"Fwy: posted 65 mph, no aux lane",6,1574
+33,Freeway,"Fwy: posted 65 mph, no aux lane",7,1523
+34,Freeway,"Fwy: posted 65 mph, aux lane",1,2430
+34,Freeway,"Fwy: posted 65 mph, aux lane",2,2080
+34,Freeway,"Fwy: posted 65 mph, aux lane",3,1964
+34,Freeway,"Fwy: posted 65 mph, aux lane",4,1871
+34,Freeway,"Fwy: posted 65 mph, aux lane",5,1784
+34,Freeway,"Fwy: posted 65 mph, aux lane",6,1691
+34,Freeway,"Fwy: posted 65 mph, aux lane",7,1623
+35,Freeway,"Fwy: posted 75 mph, no aux lane",1,1767
+35,Freeway,"Fwy: posted 75 mph, no aux lane",2,1767
+35,Freeway,"Fwy: posted 75 mph, no aux lane",3,1767
+35,Freeway,"Fwy: posted 75 mph, no aux lane",4,1732
+35,Freeway,"Fwy: posted 75 mph, no aux lane",5,1679
+35,Freeway,"Fwy: posted 75 mph, no aux lane",6,1608
+35,Freeway,"Fwy: posted 75 mph, no aux lane",7,1555
