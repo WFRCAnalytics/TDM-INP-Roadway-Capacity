@@ -134,6 +134,28 @@
     font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap;
   }
 
+  .cap-chart-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px 16px; margin: 22px 0 4px;
+  }
+  .cap-chart-title { font-size: 0.85rem; font-weight: 600; }
+  .cap-chart-sub { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; }
+  .cap-chart-bars {
+    display: flex; align-items: flex-end; gap: 3px;
+    height: 110px; padding-top: 18px;
+    border-bottom: 1px solid var(--baseline);
+  }
+  .cap-bar {
+    flex: 1 1 0; min-height: 2px; position: relative;
+    background: var(--series-1); border-radius: 3px 3px 0 0;
+  }
+  .cap-bar-value {
+    position: absolute; top: -16px; left: 0; right: 0; text-align: center;
+    font-size: 0.68rem; color: var(--text-secondary); font-variant-numeric: tabular-nums;
+  }
+  .cap-chart-ticks { display: flex; gap: 3px; margin-top: 4px; }
+  .cap-chart-ticks span { flex: 1 1 0; text-align: center; font-size: 0.68rem; color: var(--text-muted); }
+
   footer { color: var(--text-muted); font-size: 0.82rem; margin: 30px 0 10px; }
 
   @media (max-width: 640px) {
@@ -179,6 +201,13 @@
       <tbody></tbody>
     </table>
   </div>
+  <div id="cap-chart-grid" class="cap-chart-grid"></div>
+  <p class="legend-note">
+    Some lane counts in the underlying network data include an auxiliary lane
+    (e.g. a short merge/weave or turn lane) rather than a full continuous
+    through lane, which this table and chart can't distinguish from the rest
+    &mdash; keep that in mind when comparing capacity across lane counts.
+  </p>
 </section>
 
 <div class="filters">
@@ -306,6 +335,7 @@ fetch("data/capacity_data.json")
   .then(r => r.json())
   .then(data => {
     renderCapLookup(data.cap_lookup);
+    renderCapChart(data.cap_lookup);
 
     const yearSel = document.getElementById("f-year");
     const getYear = () => yearSel.value === "all" ? "all" : Number(yearSel.value);
@@ -354,6 +384,36 @@ function renderCapLookup(capLookup) {
           `${fmt0(v)}</td>`;
       }).join("")}
     </tr>`).join("");
+}
+
+// --- Model capacity companion chart (small multiples, one per FT) --------
+function renderCapChart(capLookup) {
+  const fts = [...new Map(capLookup.map(r => [r.LINK_FT, r.LINK_FTCLASS])).entries()]
+    .sort((a, b) => a[0] - b[0]);
+  const lanes = [...new Set(capLookup.map(r => r.LANES))].sort((a, b) => a - b);
+  const byFtLane = new Map(capLookup.map(r => [`${r.LINK_FT}|${r.LANES}`, r.CAP_PER_LANE]));
+
+  const max = Math.max(...capLookup.map(r => r.CAP_PER_LANE));
+  const BAR_AREA_HEIGHT = 110;
+
+  document.getElementById("cap-chart-grid").innerHTML = fts.map(([ft, ftclass]) => {
+    const bars = lanes.map((l, i) => {
+      const v = byFtLane.get(`${ft}|${l}`);
+      if (v == null) return `<div class="cap-bar" style="height:0"></div>`;
+      const h = Math.max(2, Math.round((v / max) * BAR_AREA_HEIGHT));
+      const title = `${ftclass} (FT ${ft}), ${l} lane${l == 1 ? "" : "s"}: ${fmt0(v)} veh/hr/lane`;
+      const label = i === 0 ? `<span class="cap-bar-value">${fmt0(v)}</span>` : "";
+      return `<div class="cap-bar" style="height:${h}px" title="${title}">${label}</div>`;
+    }).join("");
+    const ticks = lanes.map(l => `<span>${l}</span>`).join("");
+    return `
+      <div class="cap-chart-cell">
+        <div class="cap-chart-title">${ftclass}</div>
+        <div class="cap-chart-sub">FT ${ft}</div>
+        <div class="cap-chart-bars">${bars}</div>
+        <div class="cap-chart-ticks">${ticks}</div>
+      </div>`;
+  }).join("");
 }
 
 // --- Facility-type map + list ---------------------------------------------
