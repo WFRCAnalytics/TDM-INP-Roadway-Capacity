@@ -114,6 +114,26 @@
 
   .legend-note { font-size: 0.82rem; color: var(--text-muted); margin-top: 6px; }
 
+  .heatmap-scale {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px;
+  }
+  .heatmap-scale-bar {
+    flex: 1 1 auto; max-width: 240px; height: 10px; border-radius: 999px;
+    background: linear-gradient(to right, var(--surface-1), var(--series-1));
+    border: 1px solid var(--border);
+  }
+  .heatmap-table { width: 100%; border-collapse: separate; border-spacing: 2px; font-size: 0.85rem; }
+  .heatmap-table th {
+    text-align: left; font-weight: 600; color: var(--text-secondary);
+    padding: 6px 8px; white-space: nowrap;
+  }
+  .heatmap-table th.num, .heatmap-table td { text-align: center; }
+  .heatmap-table td {
+    padding: 8px 6px; border-radius: 4px;
+    font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap;
+  }
+
   footer { color: var(--text-muted); font-size: 0.82rem; margin: 30px 0 10px; }
 
   @media (max-width: 640px) {
@@ -140,6 +160,26 @@
     provenance and how to regenerate.
   </p>
 </header>
+
+<section class="panel">
+  <h2>Model capacity assumptions</h2>
+  <p class="panel-note">
+    The Wasatch Front TDM's own per-lane hourly capacity assumption, by facility
+    type and lane count &mdash; from calibration run C74's spdcap lookup table.
+    This is the model's input assumption, not an observed value.
+  </p>
+  <div class="heatmap-scale">
+    <span id="cap-scale-min"></span>
+    <div class="heatmap-scale-bar"></div>
+    <span id="cap-scale-max"></span>
+  </div>
+  <div class="table-scroll">
+    <table id="table-cap" class="heatmap-table">
+      <thead></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
 
 <div class="filters">
   <label for="f-year">Year</label>
@@ -265,6 +305,8 @@ function makeSortable(table, rows, renderBody) {
 fetch("data/capacity_data.json")
   .then(r => r.json())
   .then(data => {
+    renderCapLookup(data.cap_lookup);
+
     const yearSel = document.getElementById("f-year");
     const getYear = () => yearSel.value === "all" ? "all" : Number(yearSel.value);
 
@@ -276,6 +318,43 @@ fetch("data/capacity_data.json")
       stationPanel.refreshYear();
     });
   });
+
+// --- Model capacity heatmap -------------------------------------------
+function renderCapLookup(capLookup) {
+  const fts = [...new Map(capLookup.map(r => [r.LINK_FT, r.LINK_FTCLASS])).entries()]
+    .sort((a, b) => a[0] - b[0]);
+  const lanes = [...new Set(capLookup.map(r => r.LANES))].sort((a, b) => a - b);
+  const byFtLane = new Map(capLookup.map(r => [`${r.LINK_FT}|${r.LANES}`, r.CAP_PER_LANE]));
+
+  const values = capLookup.map(r => r.CAP_PER_LANE);
+  const min = Math.min(...values), max = Math.max(...values);
+  const MIX_MIN = 12, MIX_MAX = 92;
+  const mixPct = v => MIX_MIN + (v - min) / (max - min) * (MIX_MAX - MIX_MIN);
+
+  document.getElementById("cap-scale-min").textContent = fmt0(min);
+  document.getElementById("cap-scale-max").textContent = fmt0(max) + " veh/hr/lane";
+
+  document.querySelector("#table-cap thead").innerHTML = `
+    <tr>
+      <th>Facility type</th>
+      ${lanes.map(l => `<th class="num">${l} lane${l == 1 ? "" : "s"}</th>`).join("")}
+    </tr>`;
+
+  document.querySelector("#table-cap tbody").innerHTML = fts.map(([ft, ftclass]) => `
+    <tr>
+      <th scope="row">${ftclass} (FT ${ft})</th>
+      ${lanes.map(l => {
+        const v = byFtLane.get(`${ft}|${l}`);
+        if (v == null) return `<td class="num">–</td>`;
+        const pct = mixPct(v).toFixed(0);
+        const textColor = pct >= 55 ? "#fff" : "var(--text-primary)";
+        const title = `${ftclass} (FT ${ft}), ${l} lane${l == 1 ? "" : "s"}: ${fmt0(v)} veh/hr/lane`;
+        return `<td class="num" title="${title}" ` +
+          `style="background: color-mix(in oklab, var(--series-1) ${pct}%, var(--surface-1)); color: ${textColor};">` +
+          `${fmt0(v)}</td>`;
+      }).join("")}
+    </tr>`).join("");
+}
 
 // --- Facility-type map + list ---------------------------------------------
 function renderFacilityOverview(allStations, allFtSummary, getYear) {

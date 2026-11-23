@@ -293,13 +293,32 @@ def lane_breakdown_for_ft(df: pd.DataFrame, ft: int) -> pd.DataFrame:
     return grp
 
 
-def write_dashboard_data(final: pd.DataFrame, summary: pd.DataFrame) -> None:
+def capacity_lookup_for_dashboard(final: pd.DataFrame) -> pd.DataFrame:
+    """Long-format {LINK_FT, LINK_FTCLASS, LANES, CAP_PER_LANE} -- the model's
+    own spdcap assumption for every lane count 1-7, for every facility type
+    this dashboard actually covers (the FTs present in `final`, year-
+    independent so this isn't duplicated per year). Not derived from any CCS
+    observation -- this is the model's input assumption, not an output."""
+    lut = spdcap_lookup_table()
+    cap_cols = [c for c in lut.columns if c.startswith("CAPLN")]
+
+    fts = final[["LINK_FT", "LINK_FTCLASS"]].drop_duplicates().sort_values("LINK_FT")
+    long = fts.merge(lut[["FT"] + cap_cols], left_on="LINK_FT", right_on="FT", how="left").drop(columns=["FT"])
+    long = long.melt(
+        id_vars=["LINK_FT", "LINK_FTCLASS"], value_vars=cap_cols,
+        var_name="LANES", value_name="CAP_PER_LANE",
+    )
+    long["LANES"] = long["LANES"].str.replace("CAPLN", "", regex=False).astype(int)
+    return long.sort_values(["LINK_FT", "LANES"]).reset_index(drop=True)
+
+
+def write_dashboard_data(final: pd.DataFrame, summary: pd.DataFrame, cap_lookup: pd.DataFrame) -> None:
     """Writes docs/data/capacity_data.json, the GitHub Pages dashboard's one
-    data file -- {"stations": [...], "ft_summary": [...]}, derived from the
-    same tables as the CSV outputs so there's a single source of truth for
-    both. Everything the dashboard needs lives inside docs/ -- GitHub Pages
-    only serves that folder, so the dashboard must never fetch a path outside
-    it (e.g. ../output/)."""
+    data file -- {"stations": [...], "ft_summary": [...], "cap_lookup": [...]},
+    derived from the same tables as the CSV outputs so there's a single
+    source of truth for both. Everything the dashboard needs lives inside
+    docs/ -- GitHub Pages only serves that folder, so the dashboard must
+    never fetch a path outside it (e.g. ../output/)."""
     DASHBOARD_DATA_DIR.mkdir(parents=True, exist_ok=True)
 
     stations = final[
@@ -313,6 +332,7 @@ def write_dashboard_data(final: pd.DataFrame, summary: pd.DataFrame) -> None:
     payload = {
         "stations": stations.to_dict(orient="records"),
         "ft_summary": summary.to_dict(orient="records"),
+        "cap_lookup": cap_lookup.to_dict(orient="records"),
     }
     with open(DASHBOARD_DATA_DIR / "capacity_data.json", "w") as f:
         json.dump(_nan_to_none(payload), f, indent=2)
@@ -355,7 +375,10 @@ def main():
     arterial_by_lane = lane_breakdown_for_ft(final[final["YEAR"] == baseline_year], ft=2)
     arterial_by_lane.to_csv(OUT_DIR / "ft2_principal_arterial_by_lane.csv", index=False)
 
-    write_dashboard_data(final, summary)
+    cap_lookup = capacity_lookup_for_dashboard(final)
+    cap_lookup.to_csv(OUT_DIR / "cap_lookup.csv", index=False)
+
+    write_dashboard_data(final, summary, cap_lookup)
 
     print(f"{len(raw)} CCS station-years matched, {len(final)} remaining after exclusions")
     print()
